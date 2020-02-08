@@ -1,0 +1,116 @@
+/* 
+    NAVIGATION BAR
+*/
+.app_nav{
+    background-color: a;
+}
+
+.app_nav{
+    height: 8%;
+    width: 100%;
+
+    padding: 2%;
+
+    background-color: #383e42;
+    color: white;
+    border-bottom: 1px solid grey;
+    
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    position: fixed;
+
+}
+
+.app_nav ul{
+    width: 100%;
+    height: 100%;
+
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app_nav ul li{
+    font-size: 20px;
+}
+
+.logos span a{
+    color: transparent;
+   text-shadow: 0 0 0 white;
+
+   cursor: pointer;
+}
+
+.home{
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.log-out{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.app_nav ul li a:hover, .app_nav ul li a:focus,
+.app_nav ul li:hover, .app_nav ul li:focus{
+    color:gray;
+}
+
+.app_nav ul li a:visited, .app_nav ul li a:visited,
+.app_nav ul li:visited, .app_nav ul li:visited{
+    color:white;
+}
+
+.app_nav ul li a:visited:hover, .app_nav ul li a:visited:hover,
+.app_nav ul li:visited:hover, .app_nav ul li:visited:hover{
+    color:gray;
+}
+
+
+/*---------------- RESPONSIVE LAYOUT ----------------*/
+
+
+/* ----------
+        COMPUTER SCREEN REGULAR 
+----------------------*/
+@media screen and (min-width: 768px) {
+    .app_nav{
+        height: 60px;
+        width: 100%;
+    
+        padding: 2%;
+    }
+    .app_nav ul li{
+        font-size: 30px;
+    }
+
+    .home{
+        font-size: 45px;
+    }
+    .log-out{
+        font-size: 35px;
+    }
+    
+}
+  
+
+/* ---------------------- 
+        COMPUTER SCREEN LARGE 
+----------------------*/
+@media screen and (min-width: 1024px) {
+    .app_nav ul li{
+        font-size: 36px;
+    }
+
+    .home{
+        font-size: 50px;
+    }
+    .log-out{
+        font-size: 40px;
+    }
+    
+
+
+}

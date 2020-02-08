@@ -1,0 +1,76 @@
+/* 
+        - Header
+    */
+    .header {
+        width: 100%;
+        margin-top: 40px;
+        padding: 40px 0%;
+      
+    }
+    
+    .header h1{
+        width: 100%;
+    
+        margin-bottom: 15px;
+    
+        text-align: center;
+    }
+
+    #mySelect{
+        border: 1px solid black;
+        padding: 5px;
+
+    }
+
+        /*---------------- RESPONSIVE LAYOUT ----------------*/
+
+
+    /* ----------
+            COMPUTER SCREEN REGULAR 
+    ----------------------*/
+    @media screen and (min-width: 768px) {
+      
+        .header {
+            width: 100%;
+            margin-top: 60px;
+            padding: 60px 0%;
+          
+        }
+        
+        .header h1{
+            width: 100%;
+        
+            margin-bottom: 30px;
+        
+            text-align: center;
+        }
+        #mySelect{
+            font-size: 20px; 
+            
+        }
+  
+  
+    }
+      /* ---------------------- 
+            COMPUTER SCREEN LARGE 
+      ----------------------*/
+    @media screen and (min-width: 1024px) {
+        .header {
+            width: 100%;
+            margin-top: 80px;
+            padding: 80px 0%;
+          
+        }
+        
+        .header h1{
+            width: 100%;
+        
+            margin-bottom: 30px;
+        
+            text-align: center;
+        }
+
+        
+  
+    }
+  
