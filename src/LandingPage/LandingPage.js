@@ -31,6 +31,8 @@ class LandingPage extends React.Component{
                         <h1>Work made easy.</h1>
                         {/*<button className='signup-button' type='button' onClick={() => this.handleSignUp()}>Sign up!</button>*/}
                         <NavLink to='/signup'>Sign Up</NavLink>
+
+                        <p> <span className="demo-info">Demo account's log in info:<br></br>Business name: <b>Fake Company Inc.</b><br></br>Password: <b>Password5!</b></span> </p>
                     </header>
                     {/*
                     <div className='exterior-box hidden'>

@@ -6,6 +6,7 @@ import LandingPage from '../LandingPage/LandingPage';
 
 import LoginPage from '../LoginPage/LoginPage';
 import SignupPage from '../SignupPage/SignupPage';
+import UnknownPage from '../UnknownPage/UnknownPage';
 
 import LoadingPage from '../LoadingPage/LoadingPage';
 
@@ -62,9 +63,11 @@ class AltApp extends React.Component{
                     pushHome={() => routeProps.history.push('/')}
                   />}
                 />
+
+                <Route path='/' component={UnknownPage} />
                 {/* <Route exact path='/login' component={LoginPage} /> */}
                 
-                <Route exact path='/signup' component={SignupPage} />
+                {/* <Route exact path='/signup' component={SignupPage} /> */}
                 
                 {/* <Route exact path='/home' component={LoadingPage} /> */}
 

@@ -36,6 +36,11 @@
   text-decoration: underline;
 }
 
+.demo-info{
+  font-size: 13px;
+  color: grey;
+}
+
 /* WHOLE INFO SECTION*/
 .section-info{
   display: flex;
