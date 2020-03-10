@@ -113,7 +113,7 @@ class LaborPage extends React.Component{
 
     addBusinessLabor = (newWeek) => {
         console.log('patch called: ',newWeek)
-        fetch(`http://localhost:8000/all`, {
+        fetch(`${config.URL}/all`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -141,7 +141,7 @@ class LaborPage extends React.Component{
 
     patchBusinessLabor = (id, day, labor_quantity, hourData) => {
         console.log('patch called: ',day)
-        fetch(`http://localhost:8000/${id}`, {
+        fetch(`${config.URL}/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

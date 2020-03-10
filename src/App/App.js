@@ -38,17 +38,17 @@ class App extends Component {
       fetched: 'not updated',
       requests: [
                 {   
-                    url:`http://localhost:8000/business/${TokenService.getId()}`,
+                    url:`${config.URL}/business/${TokenService.getId()}`,
                     table:'operation',
                 },
 
                 {   
-                    url:`http://localhost:8000/business/${TokenService.getId()}`,
+                    url:`${config.URL}/business/${TokenService.getId()}`,
                     table:'employee',
                 },
 
                 {   
-                    url:`http://localhost:8000/business/${TokenService.getId()}`,
+                    url:`${config.URL}/business/${TokenService.getId()}`,
                     table:'shr',
                 },
       ],
@@ -139,7 +139,7 @@ class App extends Component {
       ))
       .then( ([hours, employees, dayLabor]) => {
 
-            let business = fetch(`http://localhost:8000/${TokenService.getId()}`,
+            let business = fetch(`${config.URL}/${TokenService.getId()}`,
             {
                 headers: {
                     'table':'business',
@@ -169,7 +169,7 @@ class App extends Component {
   }
   //methods
   updateEmployees = () => {
-    fetch(`http://localhost:8000/business/${TokenService.getId()}`,
+    fetch(`${config.URL}/business/${TokenService.getId()}`,
         {
             headers: {
                 'table':'employee',
@@ -196,7 +196,7 @@ class App extends Component {
   }
 
   updateBusinessDay = () => {
-    fetch(`http://localhost:8000/business/${TokenService.getId()}`,
+    fetch(`${config.URL}/business/${TokenService.getId()}`,
         {
             headers: {
                 'table':'operation',
@@ -222,7 +222,7 @@ class App extends Component {
   }
 
   updateBusinessLabor = () => {
-    fetch(`http://localhost:8000/business/${TokenService.getId()}`,
+    fetch(`${config.URL}/business/${TokenService.getId()}`,
         {
             headers: {
                 'table':'shr',

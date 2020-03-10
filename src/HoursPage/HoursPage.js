@@ -216,7 +216,7 @@ class HoursPage extends React.Component{
     }
 
     addBusinessDay = (day, open_time, close_time) => {
-        fetch(`http://localhost:8000/all`, {
+        fetch(`${config.URL}/all`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -243,7 +243,7 @@ class HoursPage extends React.Component{
 
     patchBusinessDay = (id, day, open_time, close_time) => {
         console.log('id',id);
-        fetch(`http://localhost:8000/${id}`, {
+        fetch(`${config.URL}/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

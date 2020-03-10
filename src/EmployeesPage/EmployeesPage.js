@@ -165,7 +165,7 @@ class EmployeesPage extends React.Component{
     }
     
     deleteEmployee = (id) => {
-        fetch(`http://localhost:8000/${id}`, {
+        fetch(`${config.URL}/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
@@ -188,7 +188,7 @@ class EmployeesPage extends React.Component{
     }
 
     patchEmployee = (name, availability, id) => {
-        fetch(`http://localhost:8000/${id}`, {
+        fetch(`${config.URL}/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

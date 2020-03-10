@@ -4,7 +4,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 import './AddEmployeesPage.css';
 
 import {InfoContext } from '../InfoContext';
-
+import config from '../config'
 
 //const { employees } = require('../Employees');
 import TokenService from '../services/token-service'
@@ -126,7 +126,7 @@ class AddEmployeesPage extends React.Component{
     }
 
     postEmployee = (name, availability) => {
-        fetch(`http://localhost:8000/all`, {
+        fetch(`${config.URL}/all`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
