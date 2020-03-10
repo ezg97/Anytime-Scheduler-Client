@@ -8,6 +8,7 @@ import {InfoContext } from '../InfoContext';
 
 //const { employees } = require('../Employees');
 import TokenService from '../services/token-service'
+import config from '../config'
 
 
 class EmployeesPage extends React.Component{ 

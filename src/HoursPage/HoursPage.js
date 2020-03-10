@@ -6,6 +6,7 @@ import './HoursPage.css';
 import {InfoContext } from '../InfoContext';
 
 import TokenService from '../services/token-service'
+import config from '../config'
 
 
 const { SelectDayWidget } = require('../SelectDayWidget/SelectDayWidget');

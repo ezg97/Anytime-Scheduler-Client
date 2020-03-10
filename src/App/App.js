@@ -20,6 +20,7 @@ import UnknownPage from '../UnknownPage/UnknownPage';
 
 
 import TokenService from '../services/token-service'
+import config from '../config'
 
 import AuthApiService from '../services/auth-api-service'
 import { getByTestId } from '@testing-library/react';

@@ -6,6 +6,7 @@ import './LaborPage.css';
 import {InfoContext } from '../InfoContext';
 
 import TokenService from '../services/token-service'
+import config from '../config'
 
 
 const { hours } = require('../Hours');
