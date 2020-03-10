@@ -2,10 +2,21 @@ import React, { createContext, Component} from 'react';
 
 export const InfoContext = createContext({
     businessData: null,
-    employeeData: null, dayData: null,
+    employeeData: null, 
+    dayData: null,//operation hours
     laborData: null,
     scheduleData: null,
+    fetched: null,
+    checkFetch: () => {
+
+    },
     updateEmployees: () => {
+
+    },
+    updateBusinessDay: () => {
+
+    },
+    updateBusinessLabor: () => {
 
     },
 

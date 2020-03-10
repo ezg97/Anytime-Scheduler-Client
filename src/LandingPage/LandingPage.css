@@ -1,7 +1,157 @@
  /* 
         - Header
+*/
+.landing.header{
+
+  height: 35%
+}
+.landing.header h1{
+  /* padding-top: 2%;*/
+  padding-bottom: 5%; 
+}
+
+.landing.header a, .landing.header a:visited{
+
+    border: 1px solid black;
+    background-color: #383e42;
+    color: rgb(240,240,240);
+
+    border-radius: 5px;
+    padding: 6px;
+    width: 90px;
+
+    font-weight: bold;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.landing.header a:hover, .landing.header a:focus{
+    border: 1px solid black;
+    background-color: grey;
+    color: white;
+}
+
+.landing.header a:active{
+  text-decoration: underline;
+}
+
+/* WHOLE INFO SECTION*/
+.section-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  flex-flow: 1;
+}
+
+/* INFO SECTIONS */
+ .info {
+    min-height: 100px;
+    padding: 30px 15px;
+    max-width: 550px; 
+
+    background-color: #bbb;
+  }
+  
+  .info header{
+    padding: 25px 25px;
+    margin-bottom: 20px;
+  }
+  
+  .info:nth-child(even) {
+    background-color: lightgrey;
+  }
+
+li, li a{
+  list-style-type: none;
+  text-decoration: none;
+} 
+
+
+/*  --------------
+  toggle styles
+  ---------------- */
+  .hidden {
+    display: none;
+}
+
+/*---------------- RESPONSIVE LAYOUT ----------------*/
+
+
+/* ----------
+        COMPUTER SCREEN REGULAR 
+----------------------*/
+@media screen and (min-width: 768px) {
+ 
+  .landing-header {
+    width: 100%;
+    margin-top: 60px;
+    padding: 80px 0%;
+  }
+
+  .landing-header h1{
+      width: 100%;
+      margin-bottom: 15px;
+      text-align: center;
+  }
+}
+
+/* ---------------------- 
+      COMPUTER SCREEN LARGE 
+----------------------*/
+@media screen and (min-width: 1024px) {
+
+  .landing-header {
+    width: 100%;
+    margin-top: 5%;
+  }
+
+  .landing-header h1{
+    width: 100%;
+    margin-bottom: 15px;
+
+    text-align: center;
+  }
+
+    .section-info{
+      height: 50%;
+      overflow: hidden;
+    }
+
+  .info {
+    background-color: #bbb;
+
+    height: 100%;
+    min-height: 100px;
+    padding: 30px 15px;
+    max-width: 550px; 
+  }
+
+  .landing-header button{
+
+    font-size: 20px;
+    margin-top: 15px;
+
+
+    width: 120px;
+  }
+
+  /* SECTION INFO */
+  .section-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+
+
+/* 
+        - Header
     */
-    .landing-header {
+    /* .landing-header {
         width: 100%;
         margin-top: 40px;
         padding: 60px 0%;
@@ -36,17 +186,17 @@
         background-color: white;
     }
 
-    
+     */
 
     /* WHOLE INFO SECTION*/
-    .section-info{
+    /* .section-info{
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
+    } */
     
     /* INFO SECTIONS */
-    
+/*     
     .info {
         min-height: 100px;
         padding: 30px 15px;
@@ -68,14 +218,14 @@
       list-style-type: none;
       text-decoration: none;
     }
-    
+     */
     
     /*  --------------
       toggle styles
       ---------------- */
-      .hidden {
+      /* .hidden {
         display: none;
-    }
+    } */
 
     /*---------------- RESPONSIVE LAYOUT ----------------*/
 
@@ -83,7 +233,7 @@
     /* ----------
             COMPUTER SCREEN REGULAR 
     ----------------------*/
-    @media screen and (min-width: 768px) {
+    /* @media screen and (min-width: 768px) {
      
       .landing-header {
         width: 100%;
@@ -115,11 +265,11 @@
         font-size: 24px;
       }
 
-    }
+    } */
     /* ---------------------- 
           COMPUTER SCREEN LARGE 
     ----------------------*/
-    @media screen and (min-width: 1024px) {
+    /* @media screen and (min-width: 1024px) {
   
 .landing-header {
   width: 100%;
@@ -164,4 +314,4 @@
 
   
 
-}
+} */

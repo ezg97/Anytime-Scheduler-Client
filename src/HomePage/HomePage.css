@@ -1,4 +1,4 @@
-.menu-container{
+/* .menu-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,7 +46,7 @@
 /* ----------
         COMPUTER SCREEN REGULAR 
 ----------------------*/
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
     
     .scheduling, .operations{
         width: 400px;
@@ -60,13 +60,13 @@
     }
     
     
-}
+} */
   
 
 /* ---------------------- 
         COMPUTER SCREEN LARGE 
 ----------------------*/
-@media screen and (min-width: 1024px) {
+/* @media screen and (min-width: 1024px) {
     
     .scheduling, .operations{
         width: 500px;
@@ -78,4 +78,4 @@
     }
     
 
-}
+} */ 

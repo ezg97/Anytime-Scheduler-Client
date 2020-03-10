@@ -1,7 +1,6 @@
 #select-labor{
     border: 1px solid black;
     margin: auto 0;
-    background-color: lightgray;
     color: black;
     padding: 5px;
     font-size: 14px;
@@ -17,11 +16,7 @@
     justify-content: center;
     align-items: center;
 
-    margin-top: 25px;
-
-    border-top: 1px dashed black;
-    
-
+    margin-top: 25px;  
 }
 
 /* - Section of the form -*/
@@ -65,20 +60,6 @@
     width: 250px;
 }
 
-
-/* - Submition of the form -*/
-.submit-labor{
-    width: 200px;
-    margin-top: 20px;
-    border: 1px solid grey;
-    background: lightgrey;
-    color: black;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 10px;
-
-    padding: 5px;
-}
 
 /*---------------- RESPONSIVE LAYOUT ----------------*/
 

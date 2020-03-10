@@ -7,31 +7,87 @@ import './ViewSchedule.css';
 
 import {InfoContext } from '../InfoContext';
 
-const { employees } = require('../Employees');
-const { schedule } = require('../ScheduleAlgo');
+import TokenService from '../services/token-service'
+
+
+const logic = require('../test');
 
 
 
 class ViewSchedule extends React.Component{ 
 
+
+    /* 
+        ---------------------------------
+        |            STATE              |
+        ---------------------------------
+    */
+   constructor(props){
+        super(props);
+        this.state = {
+            schedule: []
+        };
+    }
+
+
+    /* 
+        ---------------------------------
+        |            CONTEXT            |
+        ---------------------------------
+    */
     static contextType = InfoContext;
+
+
+
+    /* 
+        ---------------------------------
+        |       COMPONENT DID MOUNT     |
+    -----                               -----------------------------------------------------------------------------------------
+    |    I need to know when this components parent's fetch                                                                     |
+    |    call has been completed because:                                                                                       |
+    |    1) the function I want to call will update the state, thus causing an infinite render loop if called inside render     |
+    |    AND                                                                                                                    |
+    |    2) the reason why I need to verify the fetch call has been made is because I'm passing the data from the fetch call    |
+    |    (via context) into the function as parameters                                                                          |
+    |                                                                                                                           |
+    |----------------------------------------------------------------------------------------------------------------------------
+
+    */
+    async componentDidMount(){
+
+        //must use try/catch for async calls
+        try{
+            console.log(' --- START AWAIT')
+            //await the response (aka resolve) from checkFetch
+            let fetched = await this.context.checkFetch();
+
+            console.log('ITEMS HAVE BEEN FETCHED: ',fetched,this.context.employeeData)
+
+            //Finally can pass the context to the function
+            let newSchedule = logic.scheduleAlgo(this.context.employeeData, this.context.laborData, this.context.dayData);
+
+
+            this.setState({
+                schedule: newSchedule
+            });
+
+        } catch (err){
+            console.log('ERROR in PROMISE: ',err)
+        }
+
+    }
     
     render(){
 
-
         let selectedDay = this.props.selectedDay;
 
-        let businesses = this.context.businessData;
-        
-        
-        
-        console.log(businesses.length>0? businesses[0].business_name : null);
-        
+        let businesses = this.context.businessData;        
        
 
         return(
             
         <div className='grid-container'>
+            {console.log('S C H E D U L E :',this.state.schedule)}
             {(selectedDay != 'None')
             ?<Container className="grid" fluid style={{ lineHeight: '32px'}}>
                 <Row className='column'>
@@ -40,7 +96,7 @@ class ViewSchedule extends React.Component{
                    
                 </Row>
                 <br />
-                {schedule.map(employee => 
+                {this.state.schedule.map(employee => 
                     (employee)
                         ?<Row className='row'>
                                 <Col>{employee.name}</Col>
@@ -53,7 +109,7 @@ class ViewSchedule extends React.Component{
                                         employee.friday:selectedDay==="Sat"?
                                         employee.saturday:null
                                     }</Col>
-                                {/*employee.hours[0]*/}
+                                {console.log('ITERATION:',employee)}
                         </Row>
                         :null)
                 }

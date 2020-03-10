@@ -1,7 +1,11 @@
 #select-day{
     border: 1px solid black;
-    background-color: lightgrey;
     padding: 5px;
+}
+
+.labor-form section{
+    background-color: rgb(240,240,240);
+
 }
 
 #hours{

@@ -5,7 +5,10 @@ import './EmployeesPage.css';
 
 import {InfoContext } from '../InfoContext';
 
+
 //const { employees } = require('../Employees');
+import TokenService from '../services/token-service'
+
 
 class EmployeesPage extends React.Component{ 
 
@@ -20,7 +23,9 @@ class EmployeesPage extends React.Component{
         this.state = {
           emp: '',
           availability: '',
-          id: 0
+          id: 0,
+          messageClass:'message hide',
+          alertMessage: '',
         };
     }
     
@@ -38,9 +43,29 @@ class EmployeesPage extends React.Component{
         |            METHODS            |
         ---------------------------------
     */
+
+   clearAlert = () => {
+        this.setState({
+            alertClass:"message hide"
+        });
+    }
+
+    showAlert = (message, successClass='') => {
+        this.setState({
+            alertClass: "message"+" "+successClass,
+            alertMessage: message
+        });
+
+    }
+
+
+
         /* Handle Selected Employee:
             -- update the state to the current employee selected  */
     handleSelectedEmployee = (val) => {
+
+        this.clearAlert();
+
         {/* Save the name selected to STATE */}
         if(val != "None"){
             this.setState({emp: val});
@@ -79,6 +104,8 @@ class EmployeesPage extends React.Component{
             -- update the state to the current employee name TYPED in the INPUT BOX 
         */
     updateName = (val) => {
+        this.clearAlert();
+
         this.setState(
             {emp: val}
         );
@@ -89,12 +116,17 @@ class EmployeesPage extends React.Component{
             -- update the state to the current employee availability SELECTED in the OPTION BOX 
         */
     updateAvailability = (val) => {
+        this.clearAlert();
+
         this.setState(
             {availability: val}
         )
     }
 
+
     handleDelete = () => {
+
+        this.clearAlert();
 
         const {id } = this.state;
 
@@ -102,10 +134,15 @@ class EmployeesPage extends React.Component{
         this.context.employeeData.forEach(employee => {
             if(employee.id === id){ 
                 this.deleteEmployee(id);
+                // this.setState({
+                //     emp:'',
+                //     availability: '',
+                // });
                 
             }
         })
     }
+
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -116,8 +153,12 @@ class EmployeesPage extends React.Component{
         // database with what we have in state
         this.context.employeeData.forEach(employee => {
             if(employee.id === id){
-                if(employee.name != emp || employee.availability != availability){
+                if(employee.emp_name != emp || employee.emp_availability != availability){
+                    this.clearAlert();
                     this.patchEmployee(emp,availability, id);
+                }
+                else{
+                    this.showAlert("Error: No changes have been made.");
                 }
             }
         })
@@ -128,7 +169,8 @@ class EmployeesPage extends React.Component{
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
-                'table':'employee'
+                'table':'employee',
+                'Authorization':`bearer ${TokenService.getAuthToken()}`
             }
         })
         .then(res => {
@@ -137,7 +179,7 @@ class EmployeesPage extends React.Component{
                     throw new Error(err.status)
                 })
             }
-            console.log('RE RENDERING')
+            this.showAlert('Successfully Deleted','success');
             this.context.updateEmployees();
         })
         .catch(err => {
@@ -150,7 +192,8 @@ class EmployeesPage extends React.Component{
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
-                'table':'employee'
+                'table':'employee',
+                'Authorization':`bearer ${TokenService.getAuthToken()}`
             },
             body: JSON.stringify( 
                 { emp_name: name, emp_availability: availability }
@@ -162,13 +205,16 @@ class EmployeesPage extends React.Component{
                     throw new Error(err.status)
                 })
             }
-            console.log('RE RENDERING')
+            this.showAlert('Successfully Changed','success');
             this.context.updateEmployees();
         })
         .catch(err => {
             console.log(err);
         });
     }
+
+
+   
     /* 
         ---------------------------------
         |            RENDER             |
@@ -181,13 +227,17 @@ class EmployeesPage extends React.Component{
 
     
         return(
-        <div>
+        <div className="page-container crud">
+            <div className='back'>
+                <button className="back-button" onClick={this.props.onClickBack}>&#x202D;&#10094;</button>
+            </div>
                       
             {/* Header */}
             <header className='header'>
                 <h1>{business.length>0? business[0].business_name:null}</h1>
-                <h2>Employees</h2>
-                {console.log(this.context)}
+                <p>Select an employee from the drop down menu, 
+                    then edit or delete the employee.</p>
+                {console.log('context',this.context)}
 
             </header>
             
@@ -242,8 +292,13 @@ class EmployeesPage extends React.Component{
 
                 </section>
 
-                <button type='submit' className='submit-employee'>Submit</button>
-                <button type='button' className='submit-employee' onClick={() => this.handleDelete()}>Delete</button>
+                <button type='submit' className='submit'>Submit</button>
+                <button type='button' className='submit' onClick={() => this.handleDelete()}>Delete</button>
+
+                <section className={this.state.alertClass}>
+                    {console.log(this.state.alertClass)}
+                    <p>{this.state.alertMessage}</p>
+                </section>
 
             </form>
                 

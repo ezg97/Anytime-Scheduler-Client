@@ -17,7 +17,6 @@ class Demo extends React.Component{
     
       //update the state to the current day selected
       handleSelectedDay = (val) => {
-        console.log('ON CHANGE: ',val);
         this.setState({day: val});
     }
  
@@ -28,7 +27,7 @@ class Demo extends React.Component{
         return(
             
 
-        <div>
+        <div className="page-container crud">
              {/* 1) HEADER*/}
             <header className='header'>
                 <h1>Weekly Schedule.</h1>

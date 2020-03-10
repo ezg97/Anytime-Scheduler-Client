@@ -1,7 +1,35 @@
+.back{
+    padding-top: 55px;
+
+    float: left;
+
+    background-color: #383e42; 
+}
+
+.back-button{
+    color: white;
+
+    background-color: #383e42; 
+
+    text-align: start;
+    padding: 6px;
+    /* to center the back icon */
+    padding-right: 8px; 
+
+
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.back-button:focus, .back-button:hover{
+    color: grey;
+    cursor: pointer;
+}
+
+
 #select-employees{
     border: 1px solid black;
     margin: auto 0;
-    background-color: lightgray;
     color: black;
     font-size: 14px;
     padding: 5px;
@@ -20,9 +48,6 @@
 
     margin-top: 25px;
     line-height: 2;
-
-    border-top: 1px dashed black;
-
 }
 /*
 .section-form{
@@ -39,6 +64,10 @@
 
     font-size: 20px;
 }*/
+.employee-form section{
+    background-color: rgb(240,240,240);
+
+}
 
 .section-form label{
     margin-right: 2%;
@@ -63,17 +92,23 @@
 }
 
 
-.submit-employee{
+.submit{
     margin-top: 20px;
     border: 1px solid grey;
-    background: lightgrey;
-    color: black;
+    background: #383e42;
+    color: white;
     font-weight: bold;
     font-size: 20px;
     border-radius: 10px;
 
     width: 200px;
     padding: 5px;
+
+    cursor:pointer;
+}
+
+.submit:focus, .submit:hover{
+    color: grey;
 }
 
    /*---------------- RESPONSIVE LAYOUT ----------------*/
@@ -84,7 +119,11 @@
     ----------------------*/
     @media screen and (min-width: 768px) {
       
-
+        .back{
+            padding-top: 60px;
+        }
+        
+      
         #select-employees{
             font-size: 16px;
         }
@@ -109,6 +148,9 @@
       ----------------------*/
     @media screen and (min-width: 1024px) {
         
+        .back{
+            display: none
+        }
         #select-employees{
             font-size: 18px;
         }
@@ -117,6 +159,8 @@
 
             font-size: 30px;
         }
+
+        
       
     }
   
