@@ -1,9 +1,15 @@
     
 
+const { hours } = require('./Hours');
 
     function scheduleAlgo(employees, dayLabor, operationHours){
 
             let total_labor = 0;
+            let max_labor = 0;
+            let longest_shift = 0;
+            let shift_length = 0;
+
+            let opnBool = false;
 
             let avg_FT = 0;
             let avg_PT = 0;
@@ -26,35 +32,82 @@
                 }
             });
 
+            
 
+            operationHours.map(day => {
+                opnBool = false;
+                shift_length = 0;
+
+                hours.map( hour => {
+                    if(day.open_time === hour.time){
+                        opnBool = true;
+                    }
+
+                    if(opnBool){
+                        shift_length += 1
+                    }
+
+                    if(day.close_time === hour.time){
+                        opnBool = false;
+                    }
+
+                    
+                });
+
+                if(shift_length > longest_shift){
+                    longest_shift = shift_length;
+                }
+                
+            })
             /* 
                 Save the total amount of hours that labor is needed for into the "total_labor" variable.
             */
             dayLabor.map(hour => {
                 if(parseInt(hour.sunday) > 0){
                     total_labor += parseInt(hour.sunday);
+                    if(parseInt(hour.sunday) > max_labor){
+                        max_labor = parseInt(hour.sunday);
+                    }
                 }
                 if(parseInt(hour.monday) > 0){
                     total_labor += parseInt(hour.monday);
+                    if(parseInt(hour.monday) > max_labor){
+                        max_labor = parseInt(hour.monday);
+                    }
                 }
                 if(parseInt(hour.tuesday) > 0){
                     total_labor += parseInt(hour.tuesday);
+                    if(parseInt(hour.tuesday) > max_labor){
+                        max_labor = parseInt(hour.tuesday);
+                    }
                 }
                 if(parseInt(hour.wednesday) > 0){
                     total_labor += parseInt(hour.wednesday);
+                    if(parseInt(hour.wednesday) > max_labor){
+                        max_labor = parseInt(hour.wednesday);
+                    }
                 }
                 if(parseInt(hour.thursday) > 0){
                     total_labor += parseInt(hour.thursday);
+                    if(parseInt(hour.thursday) > max_labor){
+                        max_labor = parseInt(hour.thursday);
+                    }
                 }
                 if(parseInt(hour.friday) > 0){
                     total_labor += parseInt(hour.friday);
+                    if(parseInt(hour.friday) > max_labor){
+                        max_labor = parseInt(hour.friday);
+                    }
                 }
                 if(parseInt(hour.saturday) > 0){
                     total_labor += parseInt(hour.saturday);
+                    if(parseInt(hour.saturday) > max_labor){
+                        max_labor = parseInt(hour.saturday);
+                    }
                 }
             })
 
-
+     
             /* 
                 Save each each day's hour labor requirement to it's own list
             */
@@ -123,14 +176,13 @@
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour === 12)
-                            ||
-                            (hour.shift_time===12 && openBool === true)){
+                            (hour.shift_time === 12 && closeHour != 12))
+                            {
 
                                 return {
                                     'shift_time': hour.shift_time+hour.midday,
@@ -224,14 +276,13 @@
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour === 12)
-                            ||
-                            (hour.shift_time===12 && openBool === true)){
+                            (hour.shift_time === 12 && closeHour != 12))
+                            {
 
                                 return {
                                     'shift_time': hour.shift_time+hour.midday,
@@ -240,6 +291,7 @@
                         }
                         else{
                             // no longer open and now it is closed
+
                             openBool=false
                             closeBool=true;
                         }
@@ -254,6 +306,7 @@
                         
                     }
                 });
+
             }
 
             // TUES
@@ -294,14 +347,13 @@
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour === 12)
-                            ||
-                            (hour.shift_time===12 && openBool === true)){
+                            (hour.shift_time === 12 && closeHour != 12))
+                            {
 
                                 return {
                                     'shift_time': hour.shift_time+hour.midday,
@@ -325,8 +377,8 @@
                     }
                 
                 });
-            }
 
+            }
 
             //------------------- WED
 
@@ -372,14 +424,13 @@
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour === 12)
-                            ||
-                            (hour.shift_time===12 && openBool === true)){
+                            (hour.shift_time === 12 && closeHour != 12))
+                            {
 
                                 return {
                                     'shift_time': hour.shift_time+hour.midday,
@@ -447,14 +498,13 @@
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour === 12)
-                            ||
-                            (hour.shift_time===12 && openBool === true)){
+                            (hour.shift_time === 12 && closeHour != 12))
+                            {
 
                                 return {
                                     'shift_time': hour.shift_time+hour.midday,
@@ -523,14 +573,13 @@
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour === 12)
-                            ||
-                            (hour.shift_time===12 && openBool === true)){
+                            (hour.shift_time === 12 && closeHour != 12))
+                            {
 
                                 return {
                                     'shift_time': hour.shift_time+hour.midday,
@@ -598,14 +647,13 @@
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour === 12)
-                            ||
-                            (hour.shift_time===12 && openBool === true)){
+                            (hour.shift_time === 12 && closeHour != 12))
+                            {
 
                                 return {
                                     'shift_time': hour.shift_time+hour.midday,
@@ -632,19 +680,27 @@
             /* 
                 Average amount of hours emp_available to Full Time employees 
             */
-
+            // console.log('calc',total_labor,emps_FT.length)
+            // console.log('longest shift',longest_shift)
             avg_FT = total_labor/emps_FT.length;
             /* 
             If the average is above 40 hours (overtime), then disperse the extra hours to Part Time employees 
             */
-            if(avg_FT>40){
+            if(avg_FT>40 || max_labor > emps_FT.length || longest_shift > 10){
+                // console.log('first if')
                 //The max hours fulltimers will work subtracted from the total hours we need. 
                 // Then, divide that by how many part time employees and that's how many hours we need
                 // the part time employees to work.
-                avg_PT = ( total_labor - (40 * emps_FT.length) ) / emps_PT.length;
+                if(avg_FT>40){
+                    avg_PT = ( total_labor - (40 * emps_FT.length) ) / emps_PT.length;
+                }
+                else{
+                    avg_PT = 5;
+                }
 
                 // If the Part Time employees have all received 40hrs, then overtime must be dispersed
                 if(avg_PT>40){
+                    // console.log('second if')
                     //let total_OT = total_labor - ( (avg_FT * emps_FT.length) + (avg_PT * emps_PT.length) );
                     //let avg_OT = total_OT/(emps_FT.length+emps_PT.length);
 
@@ -656,16 +712,24 @@
                 }
                 else{
                     //FullTime employees only have to work 40 hours and part timers pick up the slack
-                    return generateSchedule(40,avg_PT)
+                    // console.log('second else', avg_PT)
+                    if(avg_PT == 0){
+                        return generateSchedule(40,avg_PT)
+                    }
+                    else{
+                        return generateSchedule(40,avg_PT)
+                    }
+
                 }
 
             }
             else{
                 //disperse hours to FT employees ONLY
+                // console.log('first else')
                 return generateSchedule(avg_FT)
             }
 
-
+            //default 
             function generateSchedule(avgHrsWeekFT,avgHrsWeekPT=0){
                 
                 let daysOpen = (sundayLabor.length > 1? 1:0) + (mondayLabor.length > 1? 1:0)
@@ -678,7 +742,7 @@
                 let avgHrsDay = Math.ceil(avgHrsWeekFT/daysOpen);
                 let avgHrsDayPT = Math.ceil(avgHrsWeekPT/daysOpen);
 
-
+                // console.log('avgHrsWeekPT: ', avgHrsWeekPT)
             
                 if(avgHrsWeekPT > 0){
                     Array.prototype.push.apply(emps_FT,emps_PT); 
@@ -707,6 +771,8 @@
                             saturdayLabor.length>0? saturdayLabor:[] 
                         ];
 
+                        // console.log('week labor: ',weekLabor)
+
                         for(let i=0; i<weekLabor.length; i++){
                             boolStart = false;
                             boolContinue = true;
@@ -731,12 +797,15 @@
                                     //grab end time
                                     if(weekLabor[i][index+1] == undefined? true:false){
                                         // 1) if at the end of the list
+                                        
                                         const endHour = incrementHour(hour.shift_time);
                                         endTime[i] = endHour;
                                         boolContinue = false;
                                     }
                                     else{
-                                        if(parseInt(weekLabor[i][index+1].labor) == 0 || (emp.emp_availability == "FT"? avgHrsDay:avgHrsDayPT) ===count){
+                                        // if(parseInt(weekLabor[i][index+1].labor) == 0 || (emp.emp_availability == "FT"? avgHrsDay:avgHrsDayPT) ===count){
+                                        if(parseInt(weekLabor[i][index+1].labor) == 0 || 10 ===count){
+
                                         // 2) if next hour doesn't need a worker OR 3) if max hours for day has been worked
                                             const endHour = incrementHour(hour.shift_time);
                                             endTime[i] = endHour;
@@ -768,7 +837,6 @@
     function incrementHour(time){
             let newTime=0;
 
-            // console.log('H O U R: ',time);
 
             if( time.includes('AM') ){
 

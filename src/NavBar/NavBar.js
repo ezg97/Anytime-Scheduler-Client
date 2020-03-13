@@ -20,9 +20,7 @@ class NavBar extends React.Component{
     logout = () => {
         const { history } = this.props
         history.push('/')
-        console.log('moved to home')
 
-        console.log('logging out...')
         TokenService.clearAuthToken()
         /* when logging out, clear the callbacks to the refresh api and idle auto logout */
         TokenService.clearCallbackBeforeExpiry()

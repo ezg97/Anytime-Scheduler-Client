@@ -45,7 +45,6 @@ class SignupPage extends React.Component{
     handleSubmit = (event) => {
         event.preventDefault();
 
-        console.log('Submitted')
 
         const {business_name, password } = this.state;
 
@@ -54,8 +53,7 @@ class SignupPage extends React.Component{
             'password': password,
         })
         .then( res => {
-            console.log('signed UP');
-            console.log(res)
+            
             //AFTER successfully creating an account, make the call to log in
             AuthApiService.postLogin({
                 business_name: business_name,
@@ -67,7 +65,6 @@ class SignupPage extends React.Component{
                 //clear error
                 this.clearError();
 
-                console.log(res)
                 // push to home page now that the user is logged in
                 this.props.pushHome();
                 // force a reload of state so that the home screen can now be displayed
@@ -75,13 +72,11 @@ class SignupPage extends React.Component{
     
             })
             .catch(err => {
-                console.log(err);
                 this.showError('An error occurred while creating your account. Please reload the page');
             })
             
         })
         .catch(err => {
-            console.log(err);
             //For example: when there no tables have been created, the error returned is an object, not a string
             if(typeof(err.error) === "string"){
                 this.showError(err.error);
@@ -150,7 +145,6 @@ class SignupPage extends React.Component{
                 <button type='submit' className='submit'>Submit</button>
 
                 <section className={this.state.errorClass}>
-                    {console.log(this.state.errorClass)}
                     <p>{this.state.errorMessage}</p>
                 </section>
 

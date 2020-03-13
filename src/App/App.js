@@ -68,7 +68,6 @@ class App extends Component {
   checkFetch = () => {
     return new Promise( (resolve,reject) => {
 
-        console.log("waiting for promise...");
         //gotta set this timeout for a second or else
         // the promise will be executed before the fetch
         //completes, thus, the below condition will always be false
@@ -84,7 +83,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('componenet mounted')
+
 
     this.fetchDatabase();
 
@@ -103,7 +102,6 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    console.log('logging out...')
 
     /* remove the token from localStorage */
     TokenService.clearAuthToken()
@@ -128,8 +126,6 @@ class App extends Component {
         )
         .then(data => {
             if (!data.ok){
-                console.log('error',data)
-                console.log('not connecting or not created', data.json().then(e => Promise.reject(e)) );
                 data=[];
                 return data;
             }
@@ -148,16 +144,19 @@ class App extends Component {
                 }
             })
             .then(data => {
-             // console.log('business: ',data.json());
+              
               if (!data.ok){
                   return data.json().then(e => Promise.reject(e));}
 
               return data.json();
             });
 
+         
             return Promise.all([business, hours, employees, dayLabor]);
       })
       .then( ([business, hours, employees, dayLabor]) => {  
+            
+
             //fetch has been completed and the state has been updated so set "fetched" to true
         
             this.setState({business, hours, employees, 'dayLabor': dayLabor.length>0? this.sort(dayLabor):[], fetched: true});
@@ -179,7 +178,6 @@ class App extends Component {
             }
         })
         .then( (employees) => {
-          console.log('responses received!!!');
           
           if (!employees.ok)
               return employees.json().then(e => Promise.reject(e));
@@ -206,7 +204,6 @@ class App extends Component {
             }
         })
         .then( (hours) => {
-          console.log('responses received!!!');
           
           if (!hours.ok)
               return hours.json().then(e => Promise.reject(e));
@@ -232,7 +229,6 @@ class App extends Component {
             }
         })
         .then( (dayLabor) => {
-          console.log('responses received!!!');
           
           if (!dayLabor.ok)
               return dayLabor.json().then(e => Promise.reject(e));

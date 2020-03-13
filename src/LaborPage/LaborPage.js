@@ -65,7 +65,6 @@ class LaborPage extends React.Component{
         const {shift_time, day, labor_quantity } = this.state;
         let newShiftTime='';
         let midday='';
-        console.log(shift_time)
 
         if(shift_time.includes('AM')){
             newShiftTime = shift_time.split('AM');
@@ -113,7 +112,6 @@ class LaborPage extends React.Component{
     }
 
     addBusinessLabor = (newWeek) => {
-        console.log('patch called: ',newWeek)
         fetch(`${config.URL}/all`, {
             method: 'POST',
             headers: {
@@ -136,12 +134,11 @@ class LaborPage extends React.Component{
             this.context.updateBusinessLabor();
         })
         .catch(err => {
-            console.log(err);
+            this.showAlert('Error: Please try again later.')        
         });
     }
 
     patchBusinessLabor = (id, day, labor_quantity, hourData) => {
-        console.log('patch called: ',day)
         fetch(`${config.URL}/${id}`, {
             method: 'PATCH',
             headers: {
@@ -164,7 +161,7 @@ class LaborPage extends React.Component{
             this.context.updateBusinessLabor();
         })
         .catch(err => {
-            console.log(err);
+            this.showAlert('Error: Please try again later.')
         });
     }
 
@@ -266,7 +263,6 @@ class LaborPage extends React.Component{
                     //accessing the correct object and selecting the key (which is a day) to get the value (labor quantity)
                     labor_quantity: hourData[day.toLowerCase()]
                 })
-                console.log(hourData[day.toLowerCase()]);
                 //set to True because the hour does indeed exist in the labor table
                 hourExists=true;
             }
@@ -292,7 +288,6 @@ class LaborPage extends React.Component{
     }
 
     updateId = (id) => {
-        console.log('state is set')
         this.setState({
             index: id
         })
@@ -407,7 +402,6 @@ class LaborPage extends React.Component{
                 <button type='submit' className='submit'>Submit</button>
 
                 <section className={this.state.alertClass}>
-                    {console.log(this.state.alertClass)}
                     <p>{this.state.alertMessage}</p>
                 </section>
 

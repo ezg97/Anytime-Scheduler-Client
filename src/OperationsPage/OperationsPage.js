@@ -31,7 +31,6 @@ class OperationsPage extends React.Component{
     }
 
     handleEmployees = () => {
-        console.log('clicked');
 
         if(this.state.employee.includes('hide')){
             this.setState({
@@ -69,7 +68,6 @@ class OperationsPage extends React.Component{
             {/* List of choices */}
             <div className='operations-links'>
                 <ul className="navLink">
-                    {console.log(this.state.employeeChildren)}
                     <li className={this.state.employeeChildren}> 
                         <NavLink to="/addEmployees">Add Employees</NavLink> 
                         <NavLink to="/employees">Edit/Delete Employees</NavLink> 

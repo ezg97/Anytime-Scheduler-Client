@@ -69,9 +69,12 @@ class HoursPage extends React.Component{
     handleSelectedDay = (val) => {
         this.clearAlert();
 
+        let updateHour = false;
+
         //if the data is an empty list (because it's a new account)
         if(this.context.dayData.length>0){
             this.context.dayData.forEach(obj => {
+                //if the database table contains info on the slected day
                 if(obj.day===val){
                     this.setState({
                         index: obj.id,
@@ -79,10 +82,20 @@ class HoursPage extends React.Component{
                     });
              
                     this.updateOpenTime(obj.open_time);
-                    this.updateCloseTime(obj.close_time)
+                    this.updateCloseTime(obj.close_time);
+
+                    updateHour = true;
                 }
                
             });
+            //executed if the database contains info, but not on the selected day
+            if(updateHour === false){
+                this.updateCloseTime('0');
+                this.updateOpenTime('0');
+                this.setState({
+                    day: val,
+                });
+            }
         }
         //if no data exists yet (new account)
         else{
@@ -154,7 +167,6 @@ class HoursPage extends React.Component{
         let dayExists=true;
         this.updateDayExists(true);
 
-        console.log( ( openHour < closeHour && openMidday === 'AM' && closeMidday === 'AM' && closeHour !== 12 ) )
 
         if( 
             ( openHour < closeHour && openMidday === 'AM' && closeMidday === 'AM' && closeHour !== 12 )
@@ -238,12 +250,11 @@ class HoursPage extends React.Component{
             this.context.updateBusinessDay();
         })
         .catch(err => {
-            console.log(err);
+            this.showAlert('Error: Please try again later.')
         });
     }
 
     patchBusinessDay = (id, day, open_time, close_time) => {
-        console.log('id',id);
         fetch(`${config.URL}/${id}`, {
             method: 'PATCH',
             headers: {
@@ -265,7 +276,7 @@ class HoursPage extends React.Component{
             this.context.updateBusinessDay();
         })
         .catch(err => {
-            console.log(err);
+            this.showAlert('Error: Please try again later.')
         });
     }
 

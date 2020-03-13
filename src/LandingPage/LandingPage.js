@@ -32,7 +32,7 @@ class LandingPage extends React.Component{
                         {/*<button className='signup-button' type='button' onClick={() => this.handleSignUp()}>Sign up!</button>*/}
                         <NavLink to='/signup'>Sign Up</NavLink>
 
-                        <p> <span className="demo-info">Demo account's log in info:<br></br>Business name: <b>Fake Company Inc.</b><br></br>Password: <b>Password5!</b></span> </p>
+                        <p> <span className="demo-info">Demo account's log in info:<br></br>Business name: <b>Fake Company Inc</b><br></br>Password: <b>Password5!</b></span> </p>
                     </header>
                     {/*
                     <div className='exterior-box hidden'>
@@ -81,7 +81,7 @@ class LandingPage extends React.Component{
                             </header>
     
                             <p>You have full, unlimited access, to view the generated schedule
-                                and can print and share via email.</p>
+                                from any device</p>
                         </section>
                     </div>
                 </div>

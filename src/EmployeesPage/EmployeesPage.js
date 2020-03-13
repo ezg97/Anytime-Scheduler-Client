@@ -184,7 +184,7 @@ class EmployeesPage extends React.Component{
             this.context.updateEmployees();
         })
         .catch(err => {
-            console.log(err);
+            this.showAlert("Error: Please try again later.")
         });
     }
 
@@ -210,7 +210,7 @@ class EmployeesPage extends React.Component{
             this.context.updateEmployees();
         })
         .catch(err => {
-            console.log(err);
+            this.showAlert('Error: Please try again later.')
         });
     }
 
@@ -238,7 +238,6 @@ class EmployeesPage extends React.Component{
                 <h1>{business.length>0? business[0].business_name:null}</h1>
                 <p>Select an employee from the drop down menu, 
                     then edit or delete the employee.</p>
-                {console.log('context',this.context)}
 
             </header>
             
@@ -297,7 +296,6 @@ class EmployeesPage extends React.Component{
                 <button type='button' className='submit' onClick={() => this.handleDelete()}>Delete</button>
 
                 <section className={this.state.alertClass}>
-                    {console.log(this.state.alertClass)}
                     <p>{this.state.alertMessage}</p>
                 </section>
 

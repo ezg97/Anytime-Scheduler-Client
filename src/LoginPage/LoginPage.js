@@ -42,28 +42,21 @@ class LoginPage extends React.Component{
     handleSubmit = (event) => {
         event.preventDefault();
 
-        console.log('submit has been clicked')
 
         const {business_name, password } = this.state;
-        console.log(business_name, password)
         AuthApiService.postLogin({
             business_name: business_name,
             password: password,
         })
         .then( res => {
-            console.log('LOGGED IN');
             this.clearError()
 
-            console.log(res)
             this.props.pushHome();
          
-            console.log('moved to home')
             window.location.reload(false)
 
         })
         .catch(err => {
-            console.log('ERROR with submission')
-            console.log(err);
             this.showError('Incorrect Business Name or Password');
         })
     }
@@ -126,7 +119,6 @@ class LoginPage extends React.Component{
                 <button type='submit' className='submit'>Submit</button>
 
                 <section className={this.state.errorClass}>
-                    {console.log(this.state.errorClass)}
                     <p>{this.state.errorMessage}</p>
                 </section>
 

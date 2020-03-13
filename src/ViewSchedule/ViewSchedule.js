@@ -57,11 +57,11 @@ class ViewSchedule extends React.Component{
 
         //must use try/catch for async calls
         try{
-            console.log(' --- START AWAIT')
+            //console.log(' --- START AWAIT')
             //await the response (aka resolve) from checkFetch
             let fetched = await this.context.checkFetch();
 
-            console.log('ITEMS HAVE BEEN FETCHED: ',fetched,this.context.employeeData)
+            //console.log('ITEMS HAVE BEEN FETCHED: ',fetched,this.context.employeeData)
 
             //Finally can pass the context to the function
             let newSchedule = logic.scheduleAlgo(this.context.employeeData, this.context.laborData, this.context.dayData);
@@ -72,7 +72,7 @@ class ViewSchedule extends React.Component{
             });
 
         } catch (err){
-            console.log('ERROR in PROMISE: ',err)
+            //console.log('ERROR in PROMISE: ',err)
         }
 
     }
@@ -87,7 +87,6 @@ class ViewSchedule extends React.Component{
         return(
             
         <div className='grid-container'>
-            {console.log('S C H E D U L E :',this.state.schedule)}
             {(selectedDay != 'None')
             ?<Container className="grid" fluid style={{ lineHeight: '32px'}}>
                 <Row className='column'>
@@ -109,7 +108,6 @@ class ViewSchedule extends React.Component{
                                         employee.friday:selectedDay==="Sat"?
                                         employee.saturday:null
                                     }</Col>
-                                {console.log('ITERATION:',employee)}
                         </Row>
                         :null)
                 }

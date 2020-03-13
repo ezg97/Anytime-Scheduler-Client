@@ -153,7 +153,7 @@ class AddEmployeesPage extends React.Component{
             this.context.updateEmployees();
         })
         .catch(err => {
-            console.log(err);
+            this.showAlert("Error: Please try again later.")
         });
     }
 
@@ -181,7 +181,7 @@ class AddEmployeesPage extends React.Component{
             <header className='header'>
                 <h1>{business.length>0? business[0].business_name:null}</h1>
                 <p>Enter the full name and availability of a new employee.</p>
-                {console.log('context',this.context)}
+       
 
             </header>
 
