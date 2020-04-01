@@ -1,20 +1,11 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
-
 import './HoursPage.css';
-
 import {InfoContext } from '../InfoContext';
-
 import TokenService from '../services/token-service'
 import config from '../config'
 
-
-const { SelectDayWidget } = require('../SelectDayWidget/SelectDayWidget');
 const { hours } = require('../Hours');
 const { days } = require('../Days');
-
-
-
 class HoursPage extends React.Component{ 
 
     /* 
@@ -41,10 +32,6 @@ class HoursPage extends React.Component{
             alertMessage: '',
         };
     }
-
-
-    
-
 
     /* 
         ---------------------------------
@@ -303,25 +290,6 @@ class HoursPage extends React.Component{
                     then select the hours of operation</p>
             </header>
 
-           {/* 
-            <Switch>
-                <Route exact path='/hours'
-                  render={(routeProps) =>
-                    <SelectDayWidget
-                        selectedDay={'Sun'}
-                    />
-                } />
-
-            </Switch>
- 
-            Both iterations not working for some reason? For this reaason I'm not 
-            putting the select option in a component even tho it is going to be reused.
-            <SelectDayWidget />
-            
-            <Switch>
-                <Route path='/hours' component={SelectDayWidget} />
-            </Switch>
-
             {/* List of choices */}
             <select id='select-day' onChange={(e) => this.handleSelectedDay(e.target.value)}>
                 <option value="None" selected>None</option>
@@ -395,18 +363,7 @@ class HoursPage extends React.Component{
                                 <option value={hour.time}>{hour.time}</option>
                             )
                         }
-                        {/* {operationHours.map(businessDay =>  
-                             This is for demonstration purposes only. In production I would make
-                                the "None" option the selected choice 
-                                (this.state.day === businessDay.day)
-                                    ?hours.map(hour =>
-                                        (hour.time === businessDay.close_time)
-                                            ?<option value={hour.time} selected>{hour.time}</option>
-                                            :<option value={hour.time}>{hour.time}</option>
-                                    // :<option value={0}>Closed</option>
-                                    )
-                                    :null
-                        )} */}
+                        
                     </select>
 
                 </section>
@@ -420,9 +377,6 @@ class HoursPage extends React.Component{
 
             </form>
                 
-                
-
-          
         </div>
         );
     }

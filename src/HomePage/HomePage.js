@@ -1,17 +1,10 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
-
-import { Container, Row, Col } from 'react-grid-system';
+import { Route, NavLink } from 'react-router-dom';
 import TokenService from '../services/token-service'
 import LoadingPage from '../LoadingPage/LoadingPage';
 import {InfoContext } from '../InfoContext';
 
-
 import './HomePage.css';
-
-
-
-const { business } = require('../Business');
 
 class HomePage extends React.Component{ 
     /* 
@@ -30,6 +23,7 @@ class HomePage extends React.Component{
         if(!TokenService.hasAuthToken()){
             return(
                 <div className="container">
+                    {console.log('load from HOME page!')}
                     <Route exact path='/' component={LoadingPage} />
                 </div>
             ); 

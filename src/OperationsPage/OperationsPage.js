@@ -1,13 +1,9 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import {InfoContext } from '../InfoContext';
 
 import './OperationsPage.css';
-
-
-
-const { business } = require('../Business');
 
 class OperationsPage extends React.Component{ 
     /* 

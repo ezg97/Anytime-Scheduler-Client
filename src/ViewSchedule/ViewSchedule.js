@@ -1,19 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-
 import { Container, Row, Col } from 'react-grid-system';
-
 import './ViewSchedule.css';
-
 import {InfoContext } from '../InfoContext';
 
-import TokenService from '../services/token-service'
-
-
 const logic = require('../test');
-
-
-
 class ViewSchedule extends React.Component{ 
 
 
@@ -57,7 +47,6 @@ class ViewSchedule extends React.Component{
 
         //must use try/catch for async calls
         try{
-            //console.log(' --- START AWAIT')
             //await the response (aka resolve) from checkFetch
             let fetched = await this.context.checkFetch();
 

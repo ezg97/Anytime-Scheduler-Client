@@ -1,6 +1,4 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
-
 import './LaborPage.css';
 
 import {InfoContext } from '../InfoContext';
@@ -8,11 +6,8 @@ import {InfoContext } from '../InfoContext';
 import TokenService from '../services/token-service'
 import config from '../config'
 
-
 const { hours } = require('../Hours');
 const { days } = require('../Days');
-
-
 
 class LaborPage extends React.Component{ 
     /* 
@@ -164,11 +159,6 @@ class LaborPage extends React.Component{
             this.showAlert('Error: Please try again later.')
         });
     }
-
-
-
-
-
 
    /* 
         ------------------------------------------------
@@ -380,16 +370,6 @@ class LaborPage extends React.Component{
                     </select>
 
                 </section>
-                    {/* <select id='hours'>
-                        {dayLabor.map(businessHour => 
-                            /* This is for demonstration purposes only. In production I would make
-                                the "None" option the selected choice *
-                            (businessHour.time === "5AM")
-                            ?<option value={businessHour.time} selected>{businessHour.time}</option>
-                            :<option value={businessHour.time}>{businessHour.time}</option>
-                        )}
-                    </select>
-                </section> */}
 
                 <section className="section-form">
                     <label htmlFor="quantity">Labor Quantity:</label>

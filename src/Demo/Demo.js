@@ -13,12 +13,12 @@ class Demo extends React.Component{
         this.state = {
           day: 'None'
         };
-      }
-    
-      //update the state to the current day selected
-      handleSelectedDay = (val) => {
-        this.setState({day: val});
     }
+    
+    //update the state to the current day selected
+    handleSelectedDay = (val) => {
+        this.setState({day: val});
+     }
  
  
     render(){
@@ -28,12 +28,12 @@ class Demo extends React.Component{
             
 
         <div className="page-container crud">
-             {/* 1) HEADER*/}
+             {/* 1. HEADER*/}
             <header className='header'>
                 <h1>Weekly Schedule.</h1>
             </header>
 
-             {/* 2) THIS WILL LET YOU SELECT THE DAY OF THE SCHEDULE YOU WANT TO SEE*/}
+             {/* 2. THIS WILL LET YOU SELECT THE DAY OF THE SCHEDULE YOU WANT TO SEE*/}
             <select id='mySelect' onChange={(e) => this.handleSelectedDay(e.target.value)}>
                     <option value="None" selected>None</option>
                     <option value="Sun" >Sunday</option>
@@ -45,16 +45,7 @@ class Demo extends React.Component{
                     <option value="Sat">Saturday</option>
             </select>
 
-            {/*<Switch>
-                <Route exact path='/Demo'
-                  render={(routeProps) =>
-                    <Test
-                        selectedDay={this.state.day}
-                    />
-                } />
-            </Switch>*/}
-
-            {/* 3) THIS COMPONENT WILL DISPLAY THE SCHEDULE*/}
+            {/* 3. THIS COMPONENT WILL DISPLAY THE SCHEDULE*/}
             <Switch>
                 <Route exact path='/Demo'
                   render={(routeProps) =>

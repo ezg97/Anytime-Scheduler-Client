@@ -1,10 +1,5 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
-
-
 import './LoginPage.css';
-
-import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
 
 class LoginPage extends React.Component{ 
@@ -117,6 +112,8 @@ class LoginPage extends React.Component{
                 
 
                 <button type='submit' className='submit'>Submit</button>
+
+                <p> <span className="demo-info">Demo account's log in info:<br></br>Business name: <b>Fake Company Inc</b><br></br>Password: <b>Password5!</b></span> </p>
 
                 <section className={this.state.errorClass}>
                     <p>{this.state.errorMessage}</p>

@@ -13,20 +13,19 @@ const { hours } = require('./Hours');
 
             let avg_FT = 0;
             let avg_PT = 0;
-            let emps_FT = 0;
-            let emps_PT = 0;
+            
             
 
             /* 
                 Create lists of Fulltime and Partime Employees 
             */
-            emps_FT = employees.filter(emp => {
+            let emps_FT = employees.filter(emp => {
                 if(emp.emp_availability === "FT"){
                     return emp;
                 }
             });
 
-            emps_PT = employees.filter(emp => {
+            let emps_PT = employees.filter(emp => {
                 if(emp.emp_availability === "PT"){
                     return emp;
                 }

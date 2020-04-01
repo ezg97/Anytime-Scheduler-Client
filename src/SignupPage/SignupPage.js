@@ -1,10 +1,4 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
-
-
-//import './SignupPage.css';
-
-import TokenService from '../services/token-service'
 //Need this to log in the user after signingup
 import AuthApiService from '../services/auth-api-service'
 

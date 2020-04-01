@@ -1,19 +1,13 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
 
 import './EmployeesPage.css';
-
 import {InfoContext } from '../InfoContext';
 
-
-//const { employees } = require('../Employees');
 import TokenService from '../services/token-service'
 import config from '../config'
 
 
 class EmployeesPage extends React.Component{ 
-
-
     /* 
         ---------------------------------
         |            STATE              |
@@ -29,7 +23,6 @@ class EmployeesPage extends React.Component{
           alertMessage: '',
         };
     }
-    
 
     /* 
         ---------------------------------
@@ -38,13 +31,11 @@ class EmployeesPage extends React.Component{
     */
     static contextType = InfoContext;
 
-
     /* 
         ---------------------------------
         |            METHODS            |
         ---------------------------------
     */
-
    clearAlert = () => {
         this.setState({
             alertClass:"message hide"
@@ -59,9 +50,7 @@ class EmployeesPage extends React.Component{
 
     }
 
-
-
-        /* Handle Selected Employee:
+    /* Handle Selected Employee:
             -- update the state to the current employee selected  */
     handleSelectedEmployee = (val) => {
 
@@ -100,10 +89,10 @@ class EmployeesPage extends React.Component{
         }
     }
 
-        /* 
+    /* 
             Update Name:
             -- update the state to the current employee name TYPED in the INPUT BOX 
-        */
+    */
     updateName = (val) => {
         this.clearAlert();
 
@@ -112,10 +101,10 @@ class EmployeesPage extends React.Component{
         );
     }
 
-        /* 
+    /* 
             Update Availability:
             -- update the state to the current employee availability SELECTED in the OPTION BOX 
-        */
+    */
     updateAvailability = (val) => {
         this.clearAlert();
 

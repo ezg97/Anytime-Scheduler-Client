@@ -61,6 +61,11 @@
     background-color: rgb(240,240,240);
 }
 
+.demo-info{
+    font-size: 13px;
+    color: black;
+  }
+
 .error{
     color: red;
 }

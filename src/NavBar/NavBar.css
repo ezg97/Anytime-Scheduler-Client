@@ -33,6 +33,7 @@
     font-size: 18px;
 }
 
+
 .logos span a{
     color: transparent;
    text-shadow: 0 0 0 white;
@@ -85,6 +86,14 @@
     color: grey;
 } 
 
+/* Landing page links */
+.options a:nth-child(1) {
+    margin-right: 25px;
+}
+
+.options a {
+    text-decoration: underline;
+}
 
 
 /*---------------- RESPONSIVE LAYOUT ----------------*/

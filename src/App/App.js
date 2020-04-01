@@ -1,19 +1,16 @@
 import React, {Component} from 'react';
-import {Route, Switch , NavLink} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import './App.css'
 
 import InfoContext from '../InfoContext';
 
-import LandingPage from '../LandingPage/LandingPage';
 import Demo from '../Demo/Demo';
 import NavBar from '../NavBar/NavBar'
 import HomePage from '../HomePage/HomePage';
 import OperationsPage from '../OperationsPage/OperationsPage';
 import EmployeesPage from '../EmployeesPage/EmployeesPage';
 import AddEmployeesPage from '../AddEmployeesPage/AddEmployeesPage';
-
-import ManagementPage from '../ManagementPage/ManagementPage';
 import LaborPage from '../LaborPage/LaborPage';
 import HoursPage from '../HoursPage/HoursPage';
 import UnknownPage from '../UnknownPage/UnknownPage';
@@ -23,8 +20,7 @@ import TokenService from '../services/token-service'
 import config from '../config'
 
 import AuthApiService from '../services/auth-api-service'
-import { getByTestId } from '@testing-library/react';
-//da
+// import { getByTestId } from '@testing-library/react';
 
 class App extends Component {
   
@@ -345,7 +341,7 @@ class App extends Component {
               {/* SIGNED IN */}
               <Route 
                 exact path={['/','/demo','/home','/operations','/employees', '/addEmployees',
-                '/management','/labor','/hours']}
+                '/labor','/hours']}
                 render={(routeProps) =>
                   <NavBar
                     bool={'true'}
@@ -386,13 +382,6 @@ class App extends Component {
                   />}
                 />
 
-              <Route exact path='/management' 
-                render={(routeProps) =>
-                  <ManagementPage
-                    onClickBack={() =>routeProps.history.goBack()} 
-                  />}
-                />
-
               <Route exact path='/labor' 
                 render={(routeProps) =>
                   <LaborPage
@@ -409,10 +398,6 @@ class App extends Component {
              
              <Route path='/' component={UnknownPage} />
 
-              {/* <Route exact path='/login' component={LoginPage} />
-              
-              <Route exact path='/signup' component={SignupPage} /> */}
-              
             </Switch>
 
           </main>

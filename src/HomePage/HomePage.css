@@ -1,3 +1,23 @@
+
+  /* INFO SECTIONS */
+   .info {
+      min-height: 100px;
+      padding: 30px 15px;
+      max-width: 550px; 
+  
+      background-color: #bbb;
+    }
+    
+    .info header{
+      padding: 25px 25px;
+      margin-bottom: 20px;
+    }
+    
+    .info:nth-child(even) {
+      background-color: lightgrey;
+    }
+  
+
 /* .menu-container{
     display: flex;
     flex-direction: column;

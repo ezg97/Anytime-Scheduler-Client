@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import './LandingPage.css';
 import LoadingPage from '../LoadingPage/LoadingPage';
@@ -9,15 +9,14 @@ import TokenService from '../services/token-service'
 
 
 class LandingPage extends React.Component{ 
-    constructor(props){
-        super(props);
-      }
+    
     
     render(){
         
         if(TokenService.hasAuthToken()){
             return(
                 <div className="container">
+                    {console.log('load from LANDING page!')}
                     <Route exact path='/' component={LoadingPage} />
                 </div>
             ); 
@@ -25,32 +24,16 @@ class LandingPage extends React.Component{
 
         else{
             return(
-                <div className='page-container'>
+                <div id='landing-bg' className='page-container'>
+                   
                     <header className='landing header'>
                     
-                        <h1>Work made easy.</h1>
-                        {/*<button className='signup-button' type='button' onClick={() => this.handleSignUp()}>Sign up!</button>*/}
-                        <NavLink to='/signup'>Sign Up</NavLink>
-
-                        <p> <span className="demo-info">Demo account's log in info:<br></br>Business name: <b>Fake Company Inc</b><br></br>Password: <b>Password5!</b></span> </p>
+                        <h1>Work made easy</h1>
                     </header>
-                    {/*
-                    <div className='exterior-box hidden'>
-                        <div className='signup-box'>
-    
-                            <header>
-                                <h3>Anytime Scheduler is in Beta</h3>
-                            </header>
-    
-                            <p>Please try again by 3/1/2020</p>
-                            <button onClick={() => toggleSignup(e)} type="button" className='signup-box-button'>Ok</button>
-    
-                        </div>
-                    </div>
-                    */}
+                    
                     <div className='section-info'>
-                    {/* SECTION ONE*/}
-                        <section className='info'>
+                        {/* SECTION ONE*/}
+                        <section className='info-landing'>
     
                             <header>
                                 <h3>Instant Scheduling</h3>
@@ -62,7 +45,7 @@ class LandingPage extends React.Component{
     
     
                         {/* SECTION TWO*/}
-                        <section className='info'>
+                        <section className='info-landing'>
     
                             <header>
                                 <h3>Full Control</h3>
@@ -74,7 +57,7 @@ class LandingPage extends React.Component{
                         </section>
     
                         {/* SECTION THREE*/}
-                        <section className='info'>
+                        <section className='info-landing'>
     
                             <header>
                                 <h3>Accessibility</h3>
@@ -84,6 +67,7 @@ class LandingPage extends React.Component{
                                 from any device</p>
                         </section>
                     </div>
+
                 </div>
                 );
         }
