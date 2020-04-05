@@ -374,15 +374,6 @@ class App extends Component {
             {/* NAV BAR */}
             <Switch>
 
-                {/* LANDING PAGE */}
-                {/* <Route exact path='/'
-                  render={(routeProps) =>
-                    <NavBar
-                      bool={'false'}
-                    />
-                  }
-                /> */}
-
                 {/* SIGNED IN */}
                 <Route 
                   exact path={['/','/demo','/home','/operations','/employees', '/addEmployees',

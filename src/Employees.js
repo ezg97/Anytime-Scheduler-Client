@@ -1,13 +1,4 @@
-/*
-const employees = [
-    { name: 'John Diggle',
-      hours: '6AM-4PM'},
-    { name: 'Bruce Wayne',
-      hours: '7AM-1PM'},
-    { name: 'Flash Gordon',
-      hours: '11AM-8PM'},
-]
-*/
+
 const employees = [
   { name: 'John Diggle',
     availability: 'FT',
