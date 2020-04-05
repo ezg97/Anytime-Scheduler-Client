@@ -131,11 +131,7 @@ class EmployeesPage extends React.Component{
         this.context.employeeData.forEach(employee => {
             if(employee.id === id){ 
                 this.deleteEmployee(id);
-                // this.setState({
-                //     emp:'',
-                //     availability: '',
-                // });
-                
+             
             }
         })
     }

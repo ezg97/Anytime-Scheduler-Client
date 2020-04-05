@@ -25,7 +25,6 @@ import TokenService from '../services/token-service'
 import config from '../config'
 
 import AuthApiService from '../services/auth-api-service'
-// import { getByTestId } from '@testing-library/react';
 
 class App extends Component {
   
@@ -115,10 +114,6 @@ class App extends Component {
     TokenService.clearAuthToken()
     /* when logging out, clear the callbacks to the refresh api and idle auto logout */
     TokenService.clearCallbackBeforeExpiry();
-
-    // const { history } = this.props;
-    // history.push('/');
-    //CLEAR the state from the info
     this.clearState();
 }
 

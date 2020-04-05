@@ -376,7 +376,6 @@ class LaborPage extends React.Component{
                                         (hour.time === businessDay.open_time)
                                             ?<option key={index} value={hour.time}>{hour.time}</option>
                                             :<option key={index} value={hour.time}>{hour.time}</option>
-                                    // :<option value={0}>Closed</option>
                                     )
                                     :null
                         )}

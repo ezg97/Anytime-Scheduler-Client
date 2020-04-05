@@ -160,7 +160,7 @@ const { hours } = require('./Hours');
                 closeBool= false;
 
             
-                //only include "shift time" and "labor"
+                // filter
                 let sunday = dayLabor.filter(hour => {
                 
             
@@ -677,16 +677,6 @@ const { hours } = require('./Hours');
 
             //default 
             function generateSchedule(avgHrsWeekFT,avgHrsWeekPT=0){
-                
-                // let daysOpen = (sundayLabor.length > 1? 1:0) + (mondayLabor.length > 1? 1:0)
-                //                 + (tuesdayLabor.length > 1? 1:0) + (wednesdayLabor.length > 1? 1:0)
-                //                 + (thursdayLabor.length > 1? 1:0) +(fridayLabor.length > 1? 1:0)
-                //                 + (saturdayLabor.length > 1? 1:0);
-
-
-
-                // let avgHrsDay = Math.ceil(avgHrsWeekFT/daysOpen);
-                // let avgHrsDayPT = Math.ceil(avgHrsWeekPT/daysOpen);
             
                 if(avgHrsWeekPT > 0){
                     Array.prototype.push.apply(emps_FT,emps_PT); 
@@ -721,8 +711,6 @@ const { hours } = require('./Hours');
                             //initialize count
                             count = 0;
                             
-
-                            // for (let index in weekLabor[i]) 
                             weekLabor[i].forEach( (hour,index) => {
                                 if (parseInt(hour.labor) > 0 && boolContinue===true) {
                                     //add to count
@@ -746,7 +734,6 @@ const { hours } = require('./Hours');
                                         boolContinue = false;
                                     }
                                     else{
-                                        // if(parseInt(weekLabor[i][index+1].labor) == 0 || (emp.emp_availability == "FT"? avgHrsDay:avgHrsDayPT) ===count){
                                         if(parseInt(weekLabor[i][index+1].labor) === 0 || 10 ===count){
 
                                         // 2) if next hour doesn't need a worker OR 3) if max hours for day has been worked

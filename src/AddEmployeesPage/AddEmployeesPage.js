@@ -5,8 +5,6 @@ import './AddEmployeesPage.css';
 
 import {InfoContext } from '../InfoContext';
 import config from '../config'
-
-//const { employees } = require('../Employees');
 import TokenService from '../services/token-service'
 
 

@@ -196,9 +196,6 @@ function scheduleAlgo(){
 
         // If the Part Time employees have all received 40hrs, then overtime must be dispersed
         if(avg_PT>40){
-            //let total_OT = total_labor - ( (avg_FT * emps_FT.length) + (avg_PT * emps_PT.length) );
-            //let avg_OT = total_OT/(emps_FT.length+emps_PT.length);
-
             //generate schedule, OT for all/same hours for all
             avg_FT = (total_labor/employees.length);
             avg_PT = (total_labor/employees.length);
