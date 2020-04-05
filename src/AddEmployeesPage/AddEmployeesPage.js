@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import './AddEmployeesPage.css';
 
@@ -44,6 +45,13 @@ class AddEmployeesPage extends React.Component{
         |            METHODS            |
         ---------------------------------
     */
+   logout = () => {
+
+    this.context.logout();
+    const { history } = this.props;
+    history.push('/');
+}
+
 
    clearAlert = () => {
         this.setState({
@@ -53,7 +61,7 @@ class AddEmployeesPage extends React.Component{
 
     showAlert = (message, successClass='') => {
         this.setState({
-            alertClass: "message"+" "+successClass,
+            alertClass: `message ${successClass}`,
             alertMessage: message
         });
     }
@@ -152,7 +160,8 @@ class AddEmployeesPage extends React.Component{
             this.context.updateEmployees();
         })
         .catch(err => {
-            this.showAlert("Error: Please try again later.")
+            this.showAlert("Error: Please try again later.");
+            this.logout();
         });
     }
 
@@ -165,7 +174,6 @@ class AddEmployeesPage extends React.Component{
     */
     render(){
 
-        let employees = this.context.employeeData;
         let business = this.context.businessData;
 
     
@@ -205,9 +213,10 @@ class AddEmployeesPage extends React.Component{
 
                     <label htmlFor="availability">Availability:</label>
                     {/* Availability SELECTION */}
-                    <select id='availability' onChange={(e) => this.updateAvailability(e.target.value)}>
+                    <select id='availability' value={this.state.availability}
+                    onChange={(e) => this.updateAvailability(e.target.value)}>
                         
-                        <option value="FT" selected>Full Time</option>
+                        <option value="FT">Full Time</option>
                         <option value="PT">Part Time</option>        
                     </select>
 
@@ -227,4 +236,4 @@ class AddEmployeesPage extends React.Component{
 }
 
 
-export default AddEmployeesPage;
+export default withRouter(AddEmployeesPage);

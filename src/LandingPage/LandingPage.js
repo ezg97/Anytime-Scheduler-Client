@@ -16,7 +16,6 @@ class LandingPage extends React.Component{
         if(TokenService.hasAuthToken()){
             return(
                 <div className="container">
-                    {console.log('load from LANDING page!')}
                     <Route exact path='/' component={LoadingPage} />
                 </div>
             ); 
@@ -40,7 +39,7 @@ class LandingPage extends React.Component{
                             </header>
     
                             <p>Generate schedules for employees and managers to veiw 
-                                for any department, at any time, unlimited times!</p>
+                                for any department, at any time, unlimited times</p>
                         </section>
     
     
@@ -53,7 +52,7 @@ class LandingPage extends React.Component{
     
                             <p>You have full control of the hour of operations of the 
                                 business, how many employees to staff per hour of each 
-                                day, and how far in advance you'd like to generate schedules.</p>
+                                day, and how far in advance you'd like to generate schedules</p>
                         </section>
     
                         {/* SECTION THREE*/}

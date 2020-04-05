@@ -1,24 +1,27 @@
 import React from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 
-
 import './NavBar.css';
 
+import {InfoContext } from '../InfoContext';
 import TokenService from '../services/token-service'
+
 
 class NavBar extends React.Component{ 
 
+    /* 
+        ---------------------------------
+        |            CONTEXT            |
+        ---------------------------------
+    */
+   static contextType = InfoContext;
+
+
     logout = () => {
-        const { history } = this.props
-        history.push('/')
 
-        TokenService.clearAuthToken()
-        /* when logging out, clear the callbacks to the refresh api and idle auto logout */
-        TokenService.clearCallbackBeforeExpiry()
-
-        this.forceUpdate()
-        window.location.reload(false)
-
+        this.context.logout();
+        const { history } = this.props;
+        history.push('/');
     }
     
     render(){
@@ -35,6 +38,7 @@ class NavBar extends React.Component{
               <li> <NavLink to="/">Anytime Scheduler</NavLink> </li>
               <li className='options'>  
                     <NavLink to="/signup">Sign Up</NavLink> 
+                    <i className='line'>|</i>
                     <NavLink to="/login">Log In</NavLink>
               </li>
             </ul>

@@ -7,6 +7,12 @@ export const InfoContext = createContext({
     laborData: null,
     scheduleData: null,
     fetched: null,
+    logout: () => {
+
+    },
+    clearState: () => {
+
+    },
     checkFetch: () => {
 
     },

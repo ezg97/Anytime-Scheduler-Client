@@ -1,8 +1,20 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
 //Need this to log in the user after signingup
 import AuthApiService from '../services/auth-api-service'
+import {AltInfoContext } from '../AltInfoContext';
 
 class SignupPage extends React.Component{ 
+
+        /* 
+        ---------------------------------
+        |            CONTEXT            |
+        ---------------------------------
+    */
+   static contextType = AltInfoContext;
+
+
         /* 
             ---------------------------------
             |            STATE              |
@@ -58,11 +70,10 @@ class SignupPage extends React.Component{
 
                 //clear error
                 this.clearError();
-
                 // push to home page now that the user is logged in
                 this.props.pushHome();
-                // force a reload of state so that the home screen can now be displayed
-                window.location.reload(false)
+                // fetch the new info from the database with the new id
+                this.context.fetchDatabase()
     
             })
             .catch(err => {
@@ -151,4 +162,4 @@ class SignupPage extends React.Component{
 }
 
 
-export default SignupPage;
+export default withRouter(SignupPage);

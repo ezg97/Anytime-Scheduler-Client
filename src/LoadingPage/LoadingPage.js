@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
 
 
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -15,8 +14,6 @@ class LoadingPage extends React.Component{
         return(
             
             <div className="loader">
-                {console.log('- - STRATING LOAD!')}
-
                 <Loader
                     type="Puff"
                     color="#00BFFF"

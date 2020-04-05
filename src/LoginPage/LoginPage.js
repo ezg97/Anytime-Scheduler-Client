@@ -1,8 +1,24 @@
 import React from 'react';
-import './LoginPage.css';
-import AuthApiService from '../services/auth-api-service'
+import { withRouter } from 'react-router-dom';
 
-class LoginPage extends React.Component{ 
+
+import './LoginPage.css';
+import AuthApiService from '../services/auth-api-service';
+
+import {AltInfoContext } from '../AltInfoContext';
+import TokenService from '../services/token-service';
+
+
+class LoginPage extends React.Component {
+    
+    /* 
+        ---------------------------------
+        |            CONTEXT            |
+        ---------------------------------
+    */
+   static contextType = AltInfoContext;
+
+
         /* 
             ---------------------------------
             |            STATE              |
@@ -17,7 +33,6 @@ class LoginPage extends React.Component{
             errorMessage: '',
         };
     }   
-
 
     //ERROR HANDLING
 
@@ -44,12 +59,10 @@ class LoginPage extends React.Component{
             password: password,
         })
         .then( res => {
-            this.clearError()
-
-            this.props.pushHome();
-         
-            window.location.reload(false)
-
+            this.clearError();
+            const { history } = this.props;
+            history.push('/');
+            this.context.fetchDatabase()
         })
         .catch(err => {
             this.showError('Incorrect Business Name or Password');
@@ -126,4 +139,4 @@ class LoginPage extends React.Component{
 }
 
 
-export default LoginPage;
+export default withRouter(LoginPage);

@@ -48,35 +48,27 @@ class ViewSchedule extends React.Component{
         //must use try/catch for async calls
         try{
             //await the response (aka resolve) from checkFetch
-            let fetched = await this.context.checkFetch();
-
-            //console.log('ITEMS HAVE BEEN FETCHED: ',fetched,this.context.employeeData)
-
+            await this.context.checkFetch();
             //Finally can pass the context to the function
             let newSchedule = logic.scheduleAlgo(this.context.employeeData, this.context.laborData, this.context.dayData);
-
-
             this.setState({
                 schedule: newSchedule
             });
 
         } catch (err){
-            //console.log('ERROR in PROMISE: ',err)
+            //Error has occurred 
         }
 
     }
     
     render(){
 
-        let selectedDay = this.props.selectedDay;
-
-        let businesses = this.context.businessData;        
-       
+        let selectedDay = this.props.selectedDay;       
 
         return(
             
         <div className='grid-container'>
-            {(selectedDay != 'None')
+            {(selectedDay !== 'None')
             ?<Container className="grid" fluid style={{ lineHeight: '32px'}}>
                 <Row className='column'>
                     <Col>Employee:</Col>
@@ -84,9 +76,9 @@ class ViewSchedule extends React.Component{
                    
                 </Row>
                 <br />
-                {this.state.schedule.map(employee => 
+                {this.state.schedule.map( (employee, index) => 
                     (employee)
-                        ?<Row className='row'>
+                        ?<Row className='row' key={index}>
                                 <Col>{employee.name}</Col>
                                 <Col>{selectedDay==="Sun"?
                                         employee.sunday:selectedDay==="Mon"?

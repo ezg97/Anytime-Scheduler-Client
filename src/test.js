@@ -13,35 +13,36 @@ const { hours } = require('./Hours');
 
             let avg_FT = 0;
             let avg_PT = 0;
-            
+            let emps_FT = [];
+            let emps_PT = [];
             
 
             /* 
                 Create lists of Fulltime and Partime Employees 
             */
-            let emps_FT = employees.filter(emp => {
+            emps_FT = employees.filter(emp => {
                 if(emp.emp_availability === "FT"){
-                    return emp;
+                    return true;
                 }
+                return false;
             });
 
-            let emps_PT = employees.filter(emp => {
+            emps_PT = employees.filter(emp => {
                 if(emp.emp_availability === "PT"){
-                    return emp;
+                    return true;
                 }
-            });
+                return false;
+            });            
 
-            
-
-            operationHours.map(day => {
+            operationHours.forEach(day => {
                 opnBool = false;
                 shift_length = 0;
-
-                hours.map( hour => {
+ 
+                hours.forEach( hour => {
                     if(day.open_time === hour.time){
-                        opnBool = true;
+                        opnBool  = true;
                     }
-
+ 
                     if(opnBool){
                         shift_length += 1
                     }
@@ -61,7 +62,7 @@ const { hours } = require('./Hours');
             /* 
                 Save the total amount of hours that labor is needed for into the "total_labor" variable.
             */
-            dayLabor.map(hour => {
+            dayLabor.forEach(hour => {
                 if(parseInt(hour.sunday) > 0){
                     total_labor += parseInt(hour.sunday);
                     if(parseInt(hour.sunday) > max_labor){
@@ -160,11 +161,11 @@ const { hours } = require('./Hours');
 
             
                 //only include "shift time" and "labor"
-                let sunday = dayLabor.filter(hour =>{
+                let sunday = dayLabor.filter(hour => {
                 
             
                     //if the current hour has surpassed the "open hour". aka, checking if it's open yet
-                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time != 12)
+                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time !== 12)
                         ||
                         (hour.shift_time === 12 && openHour === 12)
                         ||
@@ -175,24 +176,24 @@ const { hours } = require('./Hours');
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time !== 12 && closeHour !== 12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour != 12))
-                            {
-
-                                return {
-                                    'shift_time': hour.shift_time+hour.midday,
-                                    'labor': hour.monday
-                                }
+                            (hour.shift_time === 12 && closeHour !== 12))
+                        {
+                            return true;
                         }
                         else{
                             // no longer open and now it is closed
                             openBool=false
                             closeBool=true;
+                            return false;
                         }
+                    }
+                    else{
+                        return false;
                     }
                     
                 });
@@ -233,38 +234,10 @@ const { hours } = require('./Hours');
                 openBool = false;
                 closeBool= false;
 
-                //if hour.time => open and hour.midday == open.midday and hour.time != 12
-                    //or
-                    //if hour.time === 12 and open.time === 12 
-                    //or
-                    //if hour.time ==12 and openBool == true
-                        //inside if loop
-
-                        //if hour <= close and midday == midday and hour != 12
-                        //or
-                        //if hour.time === 12 and close.time === 12 
-                        //or
-                        //if hour.time ==12 and openBool == true
-
-                        //{
-                            // 'shift_time': hour.shift_time+hour.midday,
-                            // 'labor': parseInt(hour.sunday)
-                        //}
-
-                        //else
-                            
-                            //if(closeBool === false ){
-                                //closeBool = true //bc now it's finally closed
-                                
-                            //}
-
-                    
-                    
-                    // if hour.time ===12 and hour.midday === PM and open
-
+                
                 let monday = dayLabor.filter(hour =>{
                     //if the current hour has surpassed the "open hour". aka, checking if it's open yet
-                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time != 12)
+                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time !== 12)
                         ||
                         (hour.shift_time === 12 && openHour === 12)
                         ||
@@ -275,25 +248,25 @@ const { hours } = require('./Hours');
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time !== 12 && closeHour !== 12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour != 12))
-                            {
-
-                                return {
-                                    'shift_time': hour.shift_time+hour.midday,
-                                    'labor': hour.monday
-                                }
+                            (hour.shift_time === 12 && closeHour !== 12))
+                        {
+                            return  true;
+                                
                         }
                         else{
                             // no longer open and now it is closed
-
                             openBool=false
                             closeBool=true;
+                            return false;
                         }
+                    }
+                    else {
+                        return false;
                     }
                 });
 
@@ -335,7 +308,7 @@ const { hours } = require('./Hours');
 
                 let tuesday = dayLabor.filter(hour =>{
                     //if the current hour has surpassed the "open hour". aka, checking if it's open yet
-                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time != 12)
+                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time !== 12)
                         ||
                         (hour.shift_time === 12 && openHour === 12)
                         ||
@@ -346,24 +319,25 @@ const { hours } = require('./Hours');
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time !== 12 && closeHour !== 12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour != 12))
+                            (hour.shift_time === 12 && closeHour !== 12))
                             {
 
-                                return {
-                                    'shift_time': hour.shift_time+hour.midday,
-                                    'labor': hour.monday
-                                }
+                                return true;
                         }
                         else{
                             // no longer open and now it is closed
-                            openBool=false
+                            openBool=false;
                             closeBool=true;
+                            return false;
                         }
+                    }
+                    else {
+                        return false;
                     }
                 
                 });
@@ -405,14 +379,9 @@ const { hours } = require('./Hours');
                 closeBool= false;
 
                 let wednesday = dayLabor.filter(hour =>{
-                    // if(parseInt(hour.wednesday) > 0){
-                    //     return {
-                    //         'shift_time': hour.shift_time+hour.midday,
-                    //         'labor': hour.wednesday
-                    //     }
-                    // }
+                    
                     //if the current hour has surpassed the "open hour". aka, checking if it's open yet
-                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time != 12)
+                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time !== 12)
                         ||
                         (hour.shift_time === 12 && openHour === 12)
                         ||
@@ -423,24 +392,24 @@ const { hours } = require('./Hours');
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time !== 12 && closeHour !== 12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour != 12))
+                            (hour.shift_time === 12 && closeHour !== 12))
                             {
-
-                                return {
-                                    'shift_time': hour.shift_time+hour.midday,
-                                    'labor': hour.monday
-                                }
+                                return true;
                         }
                         else{
                             // no longer open and now it is closed
-                            openBool=false
+                            openBool=false;
                             closeBool=true;
+                            return false;
                         }
+                    }
+                    else {
+                        return false;
                     }
                 });
 
@@ -479,14 +448,9 @@ const { hours } = require('./Hours');
                 closeBool= false;
 
                 let thursday = dayLabor.filter(hour =>{
-                    // if(parseInt(hour.thursday) > 0){
-                    //     return {
-                    //         'shift_time': hour.shift_time+hour.midday,
-                    //         'labor': hour.thursday
-                    //     }
-                    // }
+                   
                     //if the current hour has surpassed the "open hour". aka, checking if it's open yet
-                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time != 12)
+                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time !== 12)
                         ||
                         (hour.shift_time === 12 && openHour === 12)
                         ||
@@ -497,24 +461,24 @@ const { hours } = require('./Hours');
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time !== 12 && closeHour !== 12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour != 12))
-                            {
-
-                                return {
-                                    'shift_time': hour.shift_time+hour.midday,
-                                    'labor': hour.monday
-                                }
+                            (hour.shift_time === 12 && closeHour !== 12))
+                        {
+                            return true
                         }
                         else{
                             // no longer open and now it is closed
-                            openBool=false
+                            openBool=false;
                             closeBool=true;
+                            return false;
                         }
+                    }
+                    else {
+                        return false;
                     }
                 });
 
@@ -554,14 +518,9 @@ const { hours } = require('./Hours');
                 closeBool= false;
 
                 let friday = dayLabor.filter(hour =>{
-                    // if(parseInt(hour.friday) > 0){
-                    //     return {
-                    //         'shift_time': hour.shift_time+hour.midday,
-                    //         'labor': hour.friday
-                    //     }
-                    // }
+                    
                     //if the current hour has surpassed the "open hour". aka, checking if it's open yet
-                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time != 12)
+                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time !== 12)
                         ||
                         (hour.shift_time === 12 && openHour === 12)
                         ||
@@ -572,24 +531,24 @@ const { hours } = require('./Hours');
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time !== 12 && closeHour !== 12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour != 12))
+                            (hour.shift_time === 12 && closeHour !== 12))
                             {
-
-                                return {
-                                    'shift_time': hour.shift_time+hour.midday,
-                                    'labor': hour.monday
-                                }
+                                return true;
                         }
                         else{
                             // no longer open and now it is closed
-                            openBool=false
+                            openBool=false;
                             closeBool=true;
+                            return false;
                         }
+                    }
+                    else {
+                        return false;
                     }
                 });
 
@@ -628,14 +587,8 @@ const { hours } = require('./Hours');
                 closeBool= false;
 
                 let saturday = dayLabor.filter(hour =>{
-                    // if(parseInt(hour.sunday) > 0){
-                    //     return {
-                    //         'shift_time': hour.shift_time+hour.midday,
-                    //         'labor': hour.saturday
-                    //     }
-                    // }
                     //if the current hour has surpassed the "open hour". aka, checking if it's open yet
-                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time != 12)
+                    if( (hour.shift_time >= openHour && hour.midday === openMidday && hour.shift_time !== 12)
                         ||
                         (hour.shift_time === 12 && openHour === 12)
                         ||
@@ -646,24 +599,24 @@ const { hours } = require('./Hours');
                         }
                                             
                         // if the current hour hasn't surpassed the "closing hour". aka, checking it hasn't closed yet
-                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time != 12 && closeHour !=12)
+                        if( (hour.shift_time < closeHour && hour.midday === closeMidday && hour.shift_time !== 12 && closeHour !== 12)
                             ||
                             //If the current time is in the AM and the closing time is in the PM then it's impossible for the current time to have surpassed the closing time
                             (hour.midday==="AM" && closeMidday==="PM")
                             ||
-                            (hour.shift_time === 12 && closeHour != 12))
+                            (hour.shift_time === 12 && closeHour !== 12))
                             {
-
-                                return {
-                                    'shift_time': hour.shift_time+hour.midday,
-                                    'labor': hour.monday
-                                }
+                                return true;
                         }
                         else{
                             // no longer open and now it is closed
-                            openBool=false
+                            openBool=false;
                             closeBool=true;
+                            return false;
                         }
+                    }
+                    else {
+                        return false;
                     }
                 });
 
@@ -679,14 +632,12 @@ const { hours } = require('./Hours');
             /* 
                 Average amount of hours emp_available to Full Time employees 
             */
-            // console.log('calc',total_labor,emps_FT.length)
-            // console.log('longest shift',longest_shift)
+            
             avg_FT = total_labor/emps_FT.length;
             /* 
             If the average is above 40 hours (overtime), then disperse the extra hours to Part Time employees 
             */
             if(avg_FT>40 || max_labor > emps_FT.length || longest_shift > 10){
-                // console.log('first if')
                 //The max hours fulltimers will work subtracted from the total hours we need. 
                 // Then, divide that by how many part time employees and that's how many hours we need
                 // the part time employees to work.
@@ -699,10 +650,7 @@ const { hours } = require('./Hours');
 
                 // If the Part Time employees have all received 40hrs, then overtime must be dispersed
                 if(avg_PT>40){
-                    // console.log('second if')
-                    //let total_OT = total_labor - ( (avg_FT * emps_FT.length) + (avg_PT * emps_PT.length) );
-                    //let avg_OT = total_OT/(emps_FT.length+emps_PT.length);
-
+                    
                     //generate schedule, OT for all/same hours for all
                     avg_FT = (total_labor/employees.length);
                     avg_PT = (total_labor/employees.length);
@@ -711,8 +659,8 @@ const { hours } = require('./Hours');
                 }
                 else{
                     //FullTime employees only have to work 40 hours and part timers pick up the slack
-                    // console.log('second else', avg_PT)
-                    if(avg_PT == 0){
+                   
+                    if(avg_PT === 0){
                         return generateSchedule(40,avg_PT)
                     }
                     else{
@@ -724,24 +672,21 @@ const { hours } = require('./Hours');
             }
             else{
                 //disperse hours to FT employees ONLY
-                // console.log('first else')
                 return generateSchedule(avg_FT)
             }
 
             //default 
             function generateSchedule(avgHrsWeekFT,avgHrsWeekPT=0){
                 
-                let daysOpen = (sundayLabor.length > 1? 1:0) + (mondayLabor.length > 1? 1:0)
-                                + (tuesdayLabor.length > 1? 1:0) + (wednesdayLabor.length > 1? 1:0)
-                                + (thursdayLabor.length > 1? 1:0) +(fridayLabor.length > 1? 1:0)
-                                + (saturdayLabor.length > 1? 1:0);
+                // let daysOpen = (sundayLabor.length > 1? 1:0) + (mondayLabor.length > 1? 1:0)
+                //                 + (tuesdayLabor.length > 1? 1:0) + (wednesdayLabor.length > 1? 1:0)
+                //                 + (thursdayLabor.length > 1? 1:0) +(fridayLabor.length > 1? 1:0)
+                //                 + (saturdayLabor.length > 1? 1:0);
 
 
 
-                let avgHrsDay = Math.ceil(avgHrsWeekFT/daysOpen);
-                let avgHrsDayPT = Math.ceil(avgHrsWeekPT/daysOpen);
-
-                // console.log('avgHrsWeekPT: ', avgHrsWeekPT)
+                // let avgHrsDay = Math.ceil(avgHrsWeekFT/daysOpen);
+                // let avgHrsDayPT = Math.ceil(avgHrsWeekPT/daysOpen);
             
                 if(avgHrsWeekPT > 0){
                     Array.prototype.push.apply(emps_FT,emps_PT); 
@@ -770,17 +715,16 @@ const { hours } = require('./Hours');
                             saturdayLabor.length>0? saturdayLabor:[] 
                         ];
 
-                        // console.log('week labor: ',weekLabor)
-
-                        for(let i=0; i<weekLabor.length; i++){
+                        for (let i = 0; i < weekLabor.length; i++) {
                             boolStart = false;
                             boolContinue = true;
                             //initialize count
                             count = 0;
+                            
 
-
+                            // for (let index in weekLabor[i]) 
                             weekLabor[i].forEach( (hour,index) => {
-                                if(parseInt(hour.labor) > 0 && boolContinue===true){
+                                if (parseInt(hour.labor) > 0 && boolContinue===true) {
                                     //add to count
                                     count++;
                                    
@@ -794,7 +738,7 @@ const { hours } = require('./Hours');
                                     hour.labor = parseInt(hour.labor) - 1;
                 
                                     //grab end time
-                                    if(weekLabor[i][index+1] == undefined? true:false){
+                                    if(weekLabor[i][index+1] === undefined? true:false){
                                         // 1) if at the end of the list
                                         
                                         const endHour = incrementHour(hour.shift_time);
@@ -803,7 +747,7 @@ const { hours } = require('./Hours');
                                     }
                                     else{
                                         // if(parseInt(weekLabor[i][index+1].labor) == 0 || (emp.emp_availability == "FT"? avgHrsDay:avgHrsDayPT) ===count){
-                                        if(parseInt(weekLabor[i][index+1].labor) == 0 || 10 ===count){
+                                        if(parseInt(weekLabor[i][index+1].labor) === 0 || 10 ===count){
 
                                         // 2) if next hour doesn't need a worker OR 3) if max hours for day has been worked
                                             const endHour = incrementHour(hour.shift_time);
@@ -811,21 +755,21 @@ const { hours } = require('./Hours');
                                             boolContinue = false;
                                         }
                                     }
-                
                                 }
-                            })
+                                
+                            });
                         }
             
             
                         return {
                             'name':emp.emp_name,
-                            'sunday': `${startTime[0] == undefined? 'OFF':startTime[0]+'-'+endTime[0]}`,
-                            'monday': `${startTime[1] == undefined? 'OFF':startTime[1]+'-'+endTime[1]}`,
-                            'tuesday': `${startTime[2] == undefined? 'OFF':startTime[2]+'-'+endTime[2]}`,
-                            'wednesday': `${startTime[3] == undefined? 'OFF':startTime[3]+'-'+endTime[3]}`,
-                            'thursday': `${startTime[4] == undefined? 'OFF':startTime[4]+'-'+endTime[4]}`,
-                            'friday': `${startTime[5] == undefined? 'OFF':startTime[5]+'-'+endTime[5]}`,
-                            'saturday': `${startTime[6] == undefined? 'OFF':startTime[6]+'-'+endTime[6]}`
+                            'sunday': `${startTime[0] === undefined? 'OFF':startTime[0]+'-'+endTime[0]}`,
+                            'monday': `${startTime[1] === undefined? 'OFF':startTime[1]+'-'+endTime[1]}`,
+                            'tuesday': `${startTime[2] === undefined? 'OFF':startTime[2]+'-'+endTime[2]}`,
+                            'wednesday': `${startTime[3] === undefined? 'OFF':startTime[3]+'-'+endTime[3]}`,
+                            'thursday': `${startTime[4] === undefined? 'OFF':startTime[4]+'-'+endTime[4]}`,
+                            'friday': `${startTime[5] === undefined? 'OFF':startTime[5]+'-'+endTime[5]}`,
+                            'saturday': `${startTime[6] === undefined? 'OFF':startTime[6]+'-'+endTime[6]}`
                         }
                     })
                 return schedule;
@@ -840,9 +784,6 @@ const { hours } = require('./Hours');
             if( time.includes('AM') ){
 
                 newTime = parseInt( time.split('AM') );
-                // console.log('beginning in AM..... ',newTime)
-
-
 
                 if(newTime === 12){
                     newTime = 1;
@@ -851,7 +792,7 @@ const { hours } = require('./Hours');
                     newTime = newTime+1;
                 }
 
-                if(newTime == 12){
+                if(newTime === 12){
                     newTime += "PM";
                 }
                 else{
@@ -860,8 +801,6 @@ const { hours } = require('./Hours');
             }
             else{
                 newTime = parseInt( time.split('PM') );
-                // console.log('beginning in PM..... ',newTime)
-
 
                 if(newTime === 12){
                     newTime = 1;
@@ -870,15 +809,13 @@ const { hours } = require('./Hours');
                     newTime = newTime+1;
                 }
 
-                if(newTime == 12){
+                if(newTime === 12){
                     newTime += "AM";
                 }
                 else{
                     newTime += "PM";
                 }
             }
-
-            // console.log('this is the new time: ',newTime)
 
             return newTime;
     }

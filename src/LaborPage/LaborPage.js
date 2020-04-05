@@ -1,4 +1,6 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
 import './LaborPage.css';
 
 import {InfoContext } from '../InfoContext';
@@ -36,6 +38,12 @@ class LaborPage extends React.Component{
 
 
 
+   logout = () => {
+        this.context.logout();
+        const { history } = this.props;
+        history.push('/');
+    }
+
    clearAlert = () => {
         this.setState({
             alertClass:"message hide"
@@ -44,7 +52,7 @@ class LaborPage extends React.Component{
 
     showAlert = (message, successClass='') => {
         this.setState({
-            alertClass: "message"+" "+successClass,
+            alertClass: `message ${successClass}`,
             alertMessage: message
         });
     }
@@ -85,7 +93,7 @@ class LaborPage extends React.Component{
             if(hourData.shift_time+hourData.midday===shift_time){
                 //check to see if the time in the database conflicts with the time submitted by the client
                 existingHour = true;
-                if(hourData[day.toLowerCase()] != labor_quantity){
+                if(hourData[day.toLowerCase()] !== labor_quantity){
                     this.patchBusinessLabor(hourData.id, day, labor_quantity, hourData);
                     
                     this.clearAlert();
@@ -96,7 +104,7 @@ class LaborPage extends React.Component{
             } 
         });
 
-        if(existingHour === false && shift_time!='' && shift_time!=0){
+        if(existingHour === false && shift_time!=='' && shift_time!==0){
             
             this.addBusinessLabor({ ...emptyWeek, [`${day.toLowerCase()}`]:labor_quantity })
             //this.patchBusinessLabor(day, labor_quantity, );
@@ -129,7 +137,8 @@ class LaborPage extends React.Component{
             this.context.updateBusinessLabor();
         })
         .catch(err => {
-            this.showAlert('Error: Please try again later.')        
+            this.showAlert('Error: Please try again later.');
+            this.logout();       
         });
     }
 
@@ -156,7 +165,8 @@ class LaborPage extends React.Component{
             this.context.updateBusinessLabor();
         })
         .catch(err => {
-            this.showAlert('Error: Please try again later.')
+            this.showAlert('Error: Please try again later.');
+            this.logout();
         });
     }
 
@@ -188,7 +198,7 @@ class LaborPage extends React.Component{
         
         //if tempId is not equal to "-1" then and id of the selected day was found in the operation table
         //aka the day exists in the operation table
-        if(tempId != -1){
+        if(tempId !== -1){
             //update the state with the data that reflects the new day that has been selected
             this.setState({
                 //Operation hours are in a list of objects. 
@@ -235,7 +245,7 @@ class LaborPage extends React.Component{
     updateShiftTime = (shift_time, day) => {
         this.clearAlert();
 
-        if(shift_time != "0"){
+        if(shift_time !== "0"){
             this.setState({shift_time: shift_time});
         }
         else{
@@ -269,7 +279,7 @@ class LaborPage extends React.Component{
     updateLaborQuantity = (val) => {
         this.clearAlert();
 
-        if(val != "0"){
+        if(val !== "0"){
             this.setState({labor_quantity: val});
         }
         else{
@@ -306,8 +316,10 @@ class LaborPage extends React.Component{
                 bool=false;
             }
             if(bool === true || hour.time === close_time){
-                return hour.time;
+                return true;
             }
+            return false;
+
         });
         
 
@@ -320,7 +332,6 @@ class LaborPage extends React.Component{
      
         let business = this.context.businessData;
         let operationHours = this.context.dayData;
-        let laborData = this.context.laborData;
         let employees = this.context.employeeData;
 
         return(
@@ -338,11 +349,12 @@ class LaborPage extends React.Component{
                     the labor for that hour</p>
             </header>
            
-            <select id='select-labor' onChange={(e) => this.handleSelectedDay(e.target.value)}>
-                <option value="None" selected>None</option>
+            <select id='select-labor' value={this.state.day}
+            onChange={(e) => this.handleSelectedDay(e.target.value)}>
+                <option value="">None</option>
                 {/* Displays the list of 7 days */}
-                {days.map(businessDay => 
-                    <option value={businessDay}>{businessDay}</option>
+                {days.map( (businessDay, index) => 
+                    <option key={index} value={businessDay}>{businessDay}</option>
                 )}
             </select>
 
@@ -352,17 +364,18 @@ class LaborPage extends React.Component{
                 <section className="section-form">
                     <label htmlFor="hours">Hour:</label>
                     
-                    <select id='hours' onChange={(e) => this.updateShiftTime(e.target.value,this.state.day)}> 
+                    <select id='hours' value={this.state.shift_time}
+                    onChange={(e) => this.updateShiftTime(e.target.value,this.state.day)}> 
                         <option value='0'>Closed</option>
 
-                        {operationHours.map(businessDay =>  
+                        {operationHours.map(businessDay  =>  
                             /* This is for demonstration purposes only. In production I would make
                                 the "None" option the selected choice */
                                 (this.state.day === businessDay.day)
-                                    ?this.getDaysHours(businessDay.open_time, businessDay.close_time).map(hour =>
+                                    ?this.getDaysHours(businessDay.open_time, businessDay.close_time).map( (hour, index) =>
                                         (hour.time === businessDay.open_time)
-                                            ?<option value={hour.time} selected>{hour.time}</option>
-                                            :<option value={hour.time}>{hour.time}</option>
+                                            ?<option key={index} value={hour.time}>{hour.time}</option>
+                                            :<option key={index} value={hour.time}>{hour.time}</option>
                                     // :<option value={0}>Closed</option>
                                     )
                                     :null
@@ -396,4 +409,4 @@ class LaborPage extends React.Component{
 }
 
 
-export default LaborPage;
+export default withRouter(LaborPage);

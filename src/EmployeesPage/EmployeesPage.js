@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import './EmployeesPage.css';
 import {InfoContext } from '../InfoContext';
@@ -36,6 +37,12 @@ class EmployeesPage extends React.Component{
         |            METHODS            |
         ---------------------------------
     */
+   logout = () => {
+        this.context.logout();
+        const { history } = this.props;
+        history.push('/');
+    }
+
    clearAlert = () => {
         this.setState({
             alertClass:"message hide"
@@ -44,7 +51,7 @@ class EmployeesPage extends React.Component{
 
     showAlert = (message, successClass='') => {
         this.setState({
-            alertClass: "message"+" "+successClass,
+            alertClass: `message ${successClass}`,
             alertMessage: message
         });
 
@@ -56,20 +63,20 @@ class EmployeesPage extends React.Component{
 
         this.clearAlert();
 
-        {/* Save the name selected to STATE */}
-        if(val != "None"){
+        /* Save the name selected to STATE */
+        if(val !== "None"){
             this.setState({emp: val});
         }
         else{
             this.setState({emp: ''});
         }
 
-        {/* Save the availability from the employee selected to STATE 
-                note: for some reson !== and != did not work for this.*/}
-        if( !(val == '' || val =='None')){
+        /* Save the availability from the employee selected to STATE 
+                note: for some reson !== and != did not work for this.*/
+        if( !(val === '' || val === 'None')){
             this.context.employeeData.forEach( employee => {
                 if(employee){
-                    if(employee.emp_name == val){ 
+                    if(employee.emp_name === val){ 
 
                         this.setState({
                             availability: employee.emp_availability,
@@ -143,7 +150,7 @@ class EmployeesPage extends React.Component{
         // database with what we have in state
         this.context.employeeData.forEach(employee => {
             if(employee.id === id){
-                if(employee.emp_name != emp || employee.emp_availability != availability){
+                if(employee.emp_name !== emp || employee.emp_availability !== availability){
                     this.clearAlert();
                     this.patchEmployee(emp,availability, id);
                 }
@@ -173,7 +180,8 @@ class EmployeesPage extends React.Component{
             this.context.updateEmployees();
         })
         .catch(err => {
-            this.showAlert("Error: Please try again later.")
+            this.showAlert("Error: Please try again later.");
+            this.logout();
         });
     }
 
@@ -199,7 +207,8 @@ class EmployeesPage extends React.Component{
             this.context.updateEmployees();
         })
         .catch(err => {
-            this.showAlert('Error: Please try again later.')
+            this.showAlert('Error: Please try again later.');
+            this.logout();
         });
     }
 
@@ -231,12 +240,13 @@ class EmployeesPage extends React.Component{
             </header>
             
             {/* Name selection */}
-            <select id='select-employees' onChange={(e) => this.handleSelectedEmployee(e.target.value)}>
-                    <option value="None" selected>None</option>
+            <select id='select-employees' value={this.state.emp}
+            onChange={(e) => this.handleSelectedEmployee(e.target.value)}>
+                    <option value="">None</option>
 
-                    {employees.map(employee => 
+                    {employees.map( (employee, index) => 
                         /* Have to test the value exists before proceeding*/
-                        <option value={employee? employee.emp_name:null}>{employee? employee.emp_name:null}</option>
+                        <option key={index} value={employee? employee.emp_name:null}>{employee? employee.emp_name:null}</option>
                     )}
 
             </select>
@@ -261,20 +271,21 @@ class EmployeesPage extends React.Component{
 
                     <label htmlFor="availability">Availability:</label>
                     {/* Availability SELECTION */}
-                    <select id='availability' onChange={(e) => this.updateAvailability(e.target.value)}>
+                    <select id='availability' value={this.state.availability} 
+                    onChange={(e) => this.updateAvailability(e.target.value)}>
                      
-                        {(this.state.availability == "")
+                        {(this.state.availability === "")
                             ?<>
-                            <option value="" selected></option>
+                            <option value=""></option>
                             </>
-                            :(this.state.availability == "FT")
+                            :(this.state.availability === "FT")
                                 ?<>
-                                    <option value="FT" selected>Full Time</option>
+                                    <option value="FT">Full Time</option>
                                     <option value="PT">Part Time</option>
                                 </>
                                 :<>
                                     <option value="FT">Full Time</option>
-                                    <option value="PT" selected>Part Time</option>
+                                    <option value="PT">Part Time</option>
                                 </>
                         }
                     </select>
@@ -299,4 +310,4 @@ class EmployeesPage extends React.Component{
 }
 
 
-export default EmployeesPage;
+export default withRouter(EmployeesPage);

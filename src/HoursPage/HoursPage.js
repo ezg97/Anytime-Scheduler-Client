@@ -1,4 +1,6 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
 import './HoursPage.css';
 import {InfoContext } from '../InfoContext';
 import TokenService from '../services/token-service'
@@ -38,6 +40,11 @@ class HoursPage extends React.Component{
         |            METHODS            |
         ---------------------------------
     */
+   logout = () => {
+        this.context.logout();
+        const { history } = this.props;
+        history.push('/');
+    }
 
    clearAlert = () => {
         this.setState({
@@ -47,7 +54,7 @@ class HoursPage extends React.Component{
 
     showAlert = (message, successClass='') => {
         this.setState({
-            alertClass: "message"+" "+successClass,
+            alertClass: `message ${successClass}`,
             alertMessage: message
         });
     }
@@ -99,7 +106,7 @@ class HoursPage extends React.Component{
     updateOpenTime = (val) => {
         this.clearAlert();
 
-        if(val != "0"){
+        if(val !== "0"){
             this.setState({open_time: val});
         }
         else{
@@ -110,7 +117,7 @@ class HoursPage extends React.Component{
     updateCloseTime = (val) => {
         this.clearAlert();
 
-        if(val != "0"){
+        if(val !== "0"){
             this.setState({close_time: val});
         }
         else{
@@ -158,6 +165,8 @@ class HoursPage extends React.Component{
         if( 
             ( openHour < closeHour && openMidday === 'AM' && closeMidday === 'AM' && closeHour !== 12 )
             ||
+            ( openHour > closeHour && openMidday === 'AM' && openHour === 12 )
+            ||
             ( openHour < closeHour && openMidday === 'PM' && closeMidday === 'PM' && closeHour !== 12 && openHour !== 0)
             ||
             ( openHour > closeHour && openMidday === 'PM' && closeMidday === 'PM' && openHour === 12 && closeHour !== 0 )
@@ -188,7 +197,7 @@ class HoursPage extends React.Component{
                         dayExists=true;
                         this.updateDayExists(true);
                         //verify that a change has been made, either to the opening our closing hour
-                        if(open_time != businessDay.open_time || close_time != businessDay.close_time){
+                        if(open_time !== businessDay.open_time || close_time !== businessDay.close_time){
 
                             this.patchBusinessDay(businessDay.id, day, open_time, close_time);
                         }
@@ -237,7 +246,8 @@ class HoursPage extends React.Component{
             this.context.updateBusinessDay();
         })
         .catch(err => {
-            this.showAlert('Error: Please try again later.')
+            this.showAlert('Error: Please try again later.');
+            this.logout();
         });
     }
 
@@ -263,7 +273,8 @@ class HoursPage extends React.Component{
             this.context.updateBusinessDay();
         })
         .catch(err => {
-            this.showAlert('Error: Please try again later.')
+            this.showAlert('Error: Please try again later.');
+            this.logout();
         });
     }
 
@@ -291,10 +302,11 @@ class HoursPage extends React.Component{
             </header>
 
             {/* List of choices */}
-            <select id='select-day' onChange={(e) => this.handleSelectedDay(e.target.value)}>
-                <option value="None" selected>None</option>
-                {days.map(businessDay => 
-                    <option value={businessDay}>{businessDay}</option>
+            <select id='select-day' value={this.state.day}
+            onChange={(e) => this.handleSelectedDay(e.target.value)}>
+                <option value="">None</option>
+                {days.map( (businessDay,index) => 
+                    <option key={index} value={businessDay}>{businessDay}</option>
                 )}
             </select>
             
@@ -303,7 +315,8 @@ class HoursPage extends React.Component{
                 
                 <section className="section-form">
                     <label htmlFor="hours">Open:</label>
-                    <select id='hours' onChange={(e) => this.updateOpenTime(e.target.value)}> 
+                    <select id='hours' value={this.state.open_time}
+                    onChange={(e) => this.updateOpenTime(e.target.value)}> 
                         <option value='0'>Closed</option>
 
                         {/* If the operation hour list for this company is blank (an empty list) */}
@@ -314,19 +327,19 @@ class HoursPage extends React.Component{
                                 //if the selected day matches a day stored in the operation table
                                 (this.state.day === businessDay.day)
                                     //iterate through each hour
-                                    ?hours.map(hour =>
+                                    ?hours.map( (hour, index) =>
                                         //if the current hour matches the opening time hour, then show it
                                         (hour.time === businessDay.open_time)
-                                            ?<option value={hour.time} selected>{hour.time}</option>
-                                            :<option value={hour.time}>{hour.time}</option>
+                                            ?<option key={index} value={hour.time}>{hour.time}</option>
+                                            :<option key={index} value={hour.time}>{hour.time}</option>
                                     )
                                     //if the selected day does NOT match any day stored in the operation table
-                                    :hours.map(hour =>
-                                        <option value={hour.time}>{hour.time}</option>
+                                    :hours.map( (hour, index) =>
+                                        <option key={index} value={hour.time}>{hour.time}</option>
                                     )
                             )
-                            :hours.map(hour =>
-                                <option value={hour.time}>{hour.time}</option>
+                            :hours.map( (hour, index) =>
+                                <option key={index} value={hour.time}>{hour.time}</option>
                             )
                         }
                     </select>
@@ -336,7 +349,8 @@ class HoursPage extends React.Component{
                 <section className="section-form">
 
                     <label htmlFor="hours">Close:</label>
-                    <select id='hours'  onChange={(e) => this.updateCloseTime(e.target.value)}>
+                    <select id='hours' value={this.state.close_time}
+                    onChange={(e) => this.updateCloseTime(e.target.value)}>
                         <option value='0'>Closed</option>
 
 
@@ -348,19 +362,19 @@ class HoursPage extends React.Component{
                                 //if the selected day matches a day stored in the operation table
                                 (this.state.day === businessDay.day)
                                     //iterate through each hour
-                                    ?hours.map(hour =>
+                                    ?hours.map( (hour, index) =>
                                         //if the current hour matches the closing time hour, then show it
                                         (hour.time === businessDay.close_time)
-                                            ?<option value={hour.time} selected>{hour.time}</option>
-                                            :<option value={hour.time}>{hour.time}</option>
+                                            ?<option key={index} value={hour.time} selected>{hour.time}</option>
+                                            :<option key={index} value={hour.time}>{hour.time}</option>
                                     )
                                     //if the selected day does NOT match any day stored in the operation table
-                                    :hours.map(hour =>
-                                        <option value={hour.time}>{hour.time}</option>
+                                    :hours.map( (hour, index) =>
+                                        <option key={index} value={hour.time}>{hour.time}</option>
                                     )
                             )
-                            :hours.map(hour =>
-                                <option value={hour.time}>{hour.time}</option>
+                            :hours.map( (hour, index) =>
+                                <option key={index} value={hour.time}>{hour.time}</option>
                             )
                         }
                         
@@ -383,4 +397,4 @@ class HoursPage extends React.Component{
 }
 
 
-export default HoursPage;
+export default withRouter(HoursPage);

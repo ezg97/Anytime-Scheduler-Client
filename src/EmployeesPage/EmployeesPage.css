@@ -1,24 +1,26 @@
 .back{
-    padding-top: 55px;
-
     float: left;
 
     background-color: #383e42; 
+
+    margin-bottom: 35px;
+
 }
 
+
 .back-button{
+
     color: white;
 
     background-color: #383e42; 
 
     text-align: start;
-    padding: 6px;
+    padding: 4px;
     /* to center the back icon */
     padding-right: 8px; 
 
-
     font-weight: bold;
-    font-size: 26px;
+    font-size: 22px;
 }
 
 .back-button:focus, .back-button:hover{
@@ -106,7 +108,8 @@
     @media screen and (min-width: 768px) {
       
         .back{
-            padding-top: 60px;
+            padding-top: 30px;
+            margin-bottom: 4%;
         }
         
       

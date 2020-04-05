@@ -23,7 +23,6 @@ class HomePage extends React.Component{
         if(!TokenService.hasAuthToken()){
             return(
                 <div className="container">
-                    {console.log('load from HOME page!')}
                     <Route exact path='/' component={LoadingPage} />
                 </div>
             ); 

@@ -1,10 +1,9 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import './Demo.css';
 
 import ViewSchedule from '../ViewSchedule/ViewSchedule';
-import Test from '../test';
 
 class Demo extends React.Component{ 
     
@@ -33,9 +32,10 @@ class Demo extends React.Component{
                 <h1>Weekly Schedule.</h1>
             </header>
 
+            
              {/* 2. THIS WILL LET YOU SELECT THE DAY OF THE SCHEDULE YOU WANT TO SEE*/}
-            <select id='mySelect' onChange={(e) => this.handleSelectedDay(e.target.value)}>
-                    <option value="None" selected>None</option>
+            <select value={this.state.day} id='mySelect' onChange={(e) => this.handleSelectedDay(e.target.value)}>
+                    <option value="None">None</option>
                     <option value="Sun" >Sunday</option>
                     <option value="Mon">Monday</option>
                     <option value="Tues">Tuesday</option>
