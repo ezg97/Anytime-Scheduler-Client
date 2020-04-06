@@ -52,11 +52,6 @@
     align-items: center;
 }
 
-.user-info-form > .section-form{
-    align-self: flex-end;
-
-}
-
 .section-form{
     background-color: rgb(240,240,240);
 }
@@ -87,7 +82,8 @@
         }
 
         .user-info-form > .section-form{
-                    
+            /* too far to the left otherwise */
+            align-self: flex-end;
             font-size: 22px;
         }
 

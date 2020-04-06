@@ -62,7 +62,7 @@ body {
     Nav Links
 */
 .navLink a{
-  text-decoration: none;
+  text-decoration: underline;
   color: black;
 }
 
