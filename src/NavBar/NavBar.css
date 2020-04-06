@@ -42,48 +42,7 @@
     font-weight: bold;
 }
 
-
-/*
-    Nav Links
-*/
-
-
-/* All links */
-.navLink a{
-    color: black;
-}
-
-/* Visited must be above "focus" or "hover" or else it will override those*/
-.navLink a:visited{
-    color: black;
-}
-
-.navLink a:hover, .navLink a:focus{
-    color: grey;
-} 
-
-
-/* Specific for just the links in the Navbar */
-.navbar li a{
-    color: white;
-    font-size: 12px;
-}
-
-/* Visited must be above "focus" or "hover" or else it will override those*/
-.navbar li a:visited{
-    color: white;
-}
-
-.navbar li a:hover, .navbar li a:focus{
-    color: grey;
-} 
-
-/* Landing page links */
-.line{
-    padding: 5px;
-}
-
-
+/* logos links */
 .logos span:nth-child(1) a{
     color: transparent;
     text-shadow: 0 0 0 white;
@@ -99,7 +58,32 @@
     cursor: pointer;
 }
 
-.navbar.navLink a{
+/*
+Links
+*/
+
+/* Specific for just the links in the Navbar */
+.navbar li a{
+    color: white;
+    font-size: 12px;
+}
+
+/* Visited must be above "focus" or "hover" or else it will override those*/
+.navbar li a:visited{
+    color: white;
+}
+
+.navbar li a:hover, .navbar li a:focus,
+.logos span a:hover{
+    color: grey;
+} 
+
+/* Landing page links */
+.line{
+    padding: 5px;
+}
+
+.navbar a{
     text-decoration: none;
 }
 

@@ -4,7 +4,6 @@ import { withRouter, NavLink } from 'react-router-dom';
 import './NavBar.css';
 
 import {InfoContext } from '../InfoContext';
-import TokenService from '../services/token-service'
 
 
 class NavBar extends React.Component{ 
@@ -34,7 +33,7 @@ class NavBar extends React.Component{
             {(bool === 'false')
 
             /* IF NOT SIGNED IN */
-            ?<ul className='navbar navLink'>
+            ?<ul className='navbar'>
               <li className='site'> <NavLink to="/">Anytime Scheduler</NavLink> </li>
               <li className='options'>  
                     <NavLink to="/signup">Sign Up</NavLink> 
@@ -44,7 +43,7 @@ class NavBar extends React.Component{
             </ul>
 
             /* IF SIGNED IN */
-            :<ul className='navbar navLink'>
+            :<ul className='navbar'>
                 <li className='site'> <NavLink to="/home">Anytime Scheduler</NavLink> </li>
                 <li className='logos'>
                     <span className='home'> <NavLink to="/home">&#8962;</NavLink> </span>

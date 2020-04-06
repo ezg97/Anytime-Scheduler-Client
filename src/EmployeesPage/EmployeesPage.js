@@ -251,41 +251,43 @@ class EmployeesPage extends React.Component{
             <form className="employee-form" onSubmit={e => this.handleSubmit(e)}>
 
                 <section className="section-form">
-                    <label htmlFor="name">Name:</label>
-                    {/* Name INPUT */}
-                    <input 
-                        type="text"
-                        className="name-box" 
-                        name="name" 
-                        id="name" 
-                        value={this.state.emp}
-                        onChange={(e) => this.updateName(e.target.value)}
-                    />
+                    <div className="section-form-inner">
+                        <label htmlFor="name">Name:</label>
+                        {/* Name INPUT */}
+                        <input 
+                            type="text"
+                            className="name-box" 
+                            name="name" 
+                            id="name" 
+                            value={this.state.emp}
+                            onChange={(e) => this.updateName(e.target.value)}
+                        />
+                    </div>
                 </section>
 
                 <section className="section-form">
-
-                    <label htmlFor="availability">Availability:</label>
-                    {/* Availability SELECTION */}
-                    <select id='availability' value={this.state.availability} 
-                    onChange={(e) => this.updateAvailability(e.target.value)}>
-                     
-                        {(this.state.availability === "")
-                            ?<>
-                            <option value=""></option>
-                            </>
-                            :(this.state.availability === "FT")
+                    <div className="section-form-inner">
+                        <label htmlFor="availability">Availability:</label>
+                        {/* Availability SELECTION */}
+                        <select id='availability' value={this.state.availability} 
+                        onChange={(e) => this.updateAvailability(e.target.value)}>
+                        
+                            {(this.state.availability === "")
                                 ?<>
-                                    <option value="FT">Full Time</option>
-                                    <option value="PT">Part Time</option>
+                                <option value=""></option>
                                 </>
-                                :<>
-                                    <option value="FT">Full Time</option>
-                                    <option value="PT">Part Time</option>
-                                </>
-                        }
-                    </select>
-
+                                :(this.state.availability === "FT")
+                                    ?<>
+                                        <option value="FT">Full Time</option>
+                                        <option value="PT">Part Time</option>
+                                    </>
+                                    :<>
+                                        <option value="FT">Full Time</option>
+                                        <option value="PT">Part Time</option>
+                                    </>
+                            }
+                        </select>
+                    </div>
                 </section>
 
                 <button type='submit' className='submit'>Submit</button>

@@ -362,32 +362,37 @@ class LaborPage extends React.Component{
             <form className="labor-form" onSubmit={e => this.handleSubmit(e)}>
 
                 <section className="section-form">
-                    <label htmlFor="hours">Hour:</label>
-                    
-                    <select id='hours' value={this.state.shift_time}
-                    onChange={(e) => this.updateShiftTime(e.target.value,this.state.day)}> 
-                        <option value='0'>Closed</option>
+                    <div className="section-form-inner">
 
-                        {operationHours.map(businessDay  =>  
-                            /* This is for demonstration purposes only. In production I would make
-                                the "None" option the selected choice */
-                                (this.state.day === businessDay.day)
-                                    ?this.getDaysHours(businessDay.open_time, businessDay.close_time).map( (hour, index) =>
-                                        (hour.time === businessDay.open_time)
-                                            ?<option key={index} value={hour.time}>{hour.time}</option>
-                                            :<option key={index} value={hour.time}>{hour.time}</option>
-                                    )
-                                    :null
-                        )}
-                    </select>
+                        <label htmlFor="hours">Hour:</label>
+                        
+                        <select id='hours' value={this.state.shift_time}
+                        onChange={(e) => this.updateShiftTime(e.target.value,this.state.day)}> 
+                            <option value='0'>Closed</option>
 
+                            {operationHours.map(businessDay  =>  
+                                /* This is for demonstration purposes only. In production I would make
+                                    the "None" option the selected choice */
+                                    (this.state.day === businessDay.day)
+                                        ?this.getDaysHours(businessDay.open_time, businessDay.close_time).map( (hour, index) =>
+                                            (hour.time === businessDay.open_time)
+                                                ?<option key={index} value={hour.time}>{hour.time}</option>
+                                                :<option key={index} value={hour.time}>{hour.time}</option>
+                                        )
+                                        :null
+                            )}
+                        </select>
+                    </div>
                 </section>
 
                 <section className="section-form">
-                    <label htmlFor="quantity">Labor Quantity:</label>
-                    <input type="number" className='quantity-box' name="quantity" id="quantity" 
-                    value={this.state.labor_quantity} onChange={(e) => this.updateLaborQuantity(e.target.value)}
-                    min="0" max={employees.length}/>
+                    <div className="section-form-inner">
+
+                        <label htmlFor="quantity">Labor Quantity:</label>
+                        <input type="number" className='quantity-box' name="quantity" id="quantity" 
+                        value={this.state.labor_quantity} onChange={(e) => this.updateLaborQuantity(e.target.value)}
+                        min="0" max={employees.length}/>
+                    </div>
                 </section>
 
 

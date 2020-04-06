@@ -25,7 +25,7 @@ class SignupPage extends React.Component{
         this.state = {
             business_name: '',
             password: '',
-            errorClass:'error hide',
+            errorClass:'message hide',
             errorMessage: '',
         };
     }   
@@ -36,13 +36,13 @@ class SignupPage extends React.Component{
 
     clearError = () => {
         this.setState({
-            errorClass:"error hide"
+            errorClass:"message hide"
         });
     }
 
     showError = (message) => {
         this.setState({
-            errorClass:"error",
+            errorClass:"message",
             errorMessage: message
         });
     }
@@ -122,28 +122,35 @@ class SignupPage extends React.Component{
             <form className="user-info-form" onSubmit={e => this.handleSubmit(e)}>
 
                 <section className="section-form">
-                    <label htmlFor="business_name">Business Name:</label>
-                    {/* Name INPUT */}
-                    <input 
-                        type="text"
-                        className="name-box" 
-                        name="business_name" 
-                        id="business_name" 
-                        value={this.state.business_name}
-                        onChange={(e) => this.updateBusinessName(e.target.value)}
-                    />
+                    <div className="section-form-inner">
+
+                        <label htmlFor="business_name">Business Name:</label>
+                        {/* Name INPUT */}
+                        <input 
+                            type="text"
+                            className="name-box" 
+                            name="business_name" 
+                            id="business_name" 
+                            value={this.state.business_name}
+                            onChange={(e) => this.updateBusinessName(e.target.value)}
+                        />
+                    </div>
                 </section>
+
                 <section className="section-form">
-                    <label htmlFor="password">Password:</label>
-                    {/* Name INPUT */}
-                    <input 
-                        type="password"
-                        className="name-box" 
-                        name="password" 
-                        id="password" 
-                        value={this.state.password}
-                        onChange={(e) => this.updatePassword(e.target.value)}
-                    />
+                    <div className="section-form-inner">
+
+                        <label htmlFor="password">Password:</label>
+                        {/* Name INPUT */}
+                        <input 
+                            type="password"
+                            className="name-box" 
+                            name="password" 
+                            id="password" 
+                            value={this.state.password}
+                            onChange={(e) => this.updatePassword(e.target.value)}
+                        />
+                    </div>
                 </section>
                 
 

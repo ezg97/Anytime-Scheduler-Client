@@ -314,72 +314,76 @@ class HoursPage extends React.Component{
             <form className="labor-form"  onSubmit={e => this.handleSubmit(e)}> 
                 
                 <section className="section-form">
-                    <label htmlFor="hours">Open:</label>
-                    <select id='hours' value={this.state.open_time}
-                    onChange={(e) => this.updateOpenTime(e.target.value)}> 
-                        <option value='0'>Closed</option>
+                    <div className="section-form-inner">
 
-                        {/* If the operation hour list for this company is blank (an empty list) */}
-                        {( (operationHours? operationHours.length : null)>0 )
+                        <label htmlFor="hours">Open:</label>
+                        <select id='hours' value={this.state.open_time}
+                        onChange={(e) => this.updateOpenTime(e.target.value)}> 
+                            <option value='0'>Closed</option>
 
-                            ?operationHours.map(businessDay =>  
-                                
-                                //if the selected day matches a day stored in the operation table
-                                (this.state.day === businessDay.day)
-                                    //iterate through each hour
-                                    ?hours.map( (hour, index) =>
-                                        //if the current hour matches the opening time hour, then show it
-                                        (hour.time === businessDay.open_time)
-                                            ?<option key={index} value={hour.time}>{hour.time}</option>
-                                            :<option key={index} value={hour.time}>{hour.time}</option>
-                                    )
-                                    //if the selected day does NOT match any day stored in the operation table
-                                    :hours.map( (hour, index) =>
-                                        <option key={index} value={hour.time}>{hour.time}</option>
-                                    )
-                            )
-                            :hours.map( (hour, index) =>
-                                <option key={index} value={hour.time}>{hour.time}</option>
-                            )
-                        }
-                    </select>
+                            {/* If the operation hour list for this company is blank (an empty list) */}
+                            {( (operationHours? operationHours.length : null)>0 )
+
+                                ?operationHours.map(businessDay =>  
+                                    
+                                    //if the selected day matches a day stored in the operation table
+                                    (this.state.day === businessDay.day)
+                                        //iterate through each hour
+                                        ?hours.map( (hour, index) =>
+                                            //if the current hour matches the opening time hour, then show it
+                                            (hour.time === businessDay.open_time)
+                                                ?<option key={index} value={hour.time}>{hour.time}</option>
+                                                :<option key={index} value={hour.time}>{hour.time}</option>
+                                        )
+                                        //if the selected day does NOT match any day stored in the operation table
+                                        :hours.map( (hour, index) =>
+                                            <option key={index} value={hour.time}>{hour.time}</option>
+                                        )
+                                )
+                                :hours.map( (hour, index) =>
+                                    <option key={index} value={hour.time}>{hour.time}</option>
+                                )
+                            }
+                        </select>
+                    </div>
                 </section>
 
                     
                 <section className="section-form">
+                    <div className="section-form-inner">
 
-                    <label htmlFor="hours">Close:</label>
-                    <select id='hours' value={this.state.close_time}
-                    onChange={(e) => this.updateCloseTime(e.target.value)}>
-                        <option value='0'>Closed</option>
+                        <label htmlFor="hours">Close:</label>
+                        <select id='hours' value={this.state.close_time}
+                        onChange={(e) => this.updateCloseTime(e.target.value)}>
+                            <option value='0'>Closed</option>
 
 
-                        {/* If the operation hour list for this company is blank (an empty list) */}
-                        {( (operationHours? operationHours.length : null)>0 )
+                            {/* If the operation hour list for this company is blank (an empty list) */}
+                            {( (operationHours? operationHours.length : null)>0 )
 
-                            ?operationHours.map(businessDay =>  
-                                
-                                //if the selected day matches a day stored in the operation table
-                                (this.state.day === businessDay.day)
-                                    //iterate through each hour
-                                    ?hours.map( (hour, index) =>
-                                        //if the current hour matches the closing time hour, then show it
-                                        (hour.time === businessDay.close_time)
-                                            ?<option key={index} value={hour.time} selected>{hour.time}</option>
-                                            :<option key={index} value={hour.time}>{hour.time}</option>
-                                    )
-                                    //if the selected day does NOT match any day stored in the operation table
-                                    :hours.map( (hour, index) =>
-                                        <option key={index} value={hour.time}>{hour.time}</option>
-                                    )
-                            )
-                            :hours.map( (hour, index) =>
-                                <option key={index} value={hour.time}>{hour.time}</option>
-                            )
-                        }
-                        
-                    </select>
-
+                                ?operationHours.map(businessDay =>  
+                                    
+                                    //if the selected day matches a day stored in the operation table
+                                    (this.state.day === businessDay.day)
+                                        //iterate through each hour
+                                        ?hours.map( (hour, index) =>
+                                            //if the current hour matches the closing time hour, then show it
+                                            (hour.time === businessDay.close_time)
+                                                ?<option key={index} value={hour.time} selected>{hour.time}</option>
+                                                :<option key={index} value={hour.time}>{hour.time}</option>
+                                        )
+                                        //if the selected day does NOT match any day stored in the operation table
+                                        :hours.map( (hour, index) =>
+                                            <option key={index} value={hour.time}>{hour.time}</option>
+                                        )
+                                )
+                                :hours.map( (hour, index) =>
+                                    <option key={index} value={hour.time}>{hour.time}</option>
+                                )
+                            }
+                            
+                        </select>
+                    </div>
                 </section>
 
 
