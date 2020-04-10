@@ -87,6 +87,7 @@ class App extends Component {
     /* if a user is logged in */
     if (TokenService.hasAuthToken()) {
       //fetch from the database if the user has a token
+      console.log('answer',TokenService.hasAuthToken())
       this.fetchDatabase();
 
         /*
@@ -131,6 +132,7 @@ class App extends Component {
 
   fetchDatabase = () => {
     //first update the requests
+    console.log('fetching... ', TokenService.hasAuthToken(), TokenService.getAuthToken())
     this.updateRequests();
 
 
@@ -163,9 +165,9 @@ class App extends Component {
                 }
             })
             .then(data => {
-              
+              console.log('response receieved', data);
               if (!data.ok){
-                  console.log('eror: ',data)
+                  console.error('eror: ',data)
                   return data.json().then(e => Promise.reject(e));
                 }
 
@@ -176,17 +178,13 @@ class App extends Component {
             return Promise.all([business, hours, employees, dayLabor]);
       })
       .then( ([business, hours, employees, dayLabor]) => {  
-            
-
             //fetch has been completed and the state has been updated so set "fetched" to true
         
             this.setState({business, hours, employees, 'dayLabor': dayLabor.length>0? this.sort(dayLabor):[], fetched: true});
-
-            
       })
       .catch(error => {
-        console.log('1');
-            this.logout();
+        console.log('1',error);
+        this.logout();
       });
   }
   //update the requests with the current id, since it's only initialized when the page is loaded.
@@ -230,11 +228,10 @@ class App extends Component {
           return employees.json();
       })
       .then( (employees) => {
-        console.log('2');
-
           this.setState({employees});
       })
       .catch(error => {
+        console.log('2');
 
         this.logout();
       });
@@ -377,7 +374,7 @@ class App extends Component {
           updateBusinessLabor: this.updateBusinessLabor}}>
 
           <div className="container">
-            {/* NAV BAR */}
+            {/* NAV BAR */ console.log('state', this.state)}
             <Switch>
 
                 {/* SIGNED IN */}

@@ -174,6 +174,10 @@ class EmployeesPage extends React.Component{
             }
             this.showAlert('Successfully Deleted','success');
             this.context.updateEmployees();
+            this.setState({
+                emp: '',
+                availability: '',
+            });
         })
         .catch(err => {
             this.showAlert("Error: Please try again later.");

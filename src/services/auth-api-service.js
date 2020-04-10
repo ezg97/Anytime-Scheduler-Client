@@ -44,7 +44,7 @@ const AuthApiService = {
         return res
       })
       .catch(err => {
-        console.log("Error");
+        //error caught
       });
   },
   postRefreshToken() {
