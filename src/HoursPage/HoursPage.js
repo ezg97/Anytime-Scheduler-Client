@@ -301,23 +301,30 @@ class HoursPage extends React.Component{
                     then select the hours of operation</p>
             </header>
 
-            {/* List of choices */}
-            <select id='select-day' value={this.state.day}
-            onChange={(e) => this.handleSelectedDay(e.target.value)}>
-                <option value="">None</option>
-                {days.map( (businessDay,index) => 
-                    <option key={index} value={businessDay}>{businessDay}</option>
-                )}
-            </select>
-            
+           
            {/* FORM */}
             <form className="labor-form"  onSubmit={e => this.handleSubmit(e)}> 
-                
+                <section className="section-form">
+                    <div className="section-form-inner">
+                         {/* List of choices */}
+                         <label htmlFor="hours">Hours:</label>
+                        <select id='select-day' value={this.state.day}
+                        onChange={(e) => this.handleSelectedDay(e.target.value)}>
+                            <option value="">None</option>
+                            {days.map( (businessDay,index) => 
+                                <option key={index} value={businessDay}>{businessDay}</option>
+                            )}
+                        </select>
+        
+                    </div>
+                </section>
+
+
                 <section className="section-form">
                     <div className="section-form-inner">
 
                         <label htmlFor="hours">Open:</label>
-                        <select id='hours' value={this.state.open_time}
+                        <select value={this.state.open_time}
                         onChange={(e) => this.updateOpenTime(e.target.value)}> 
                             <option value='0'>Closed</option>
 
@@ -353,7 +360,7 @@ class HoursPage extends React.Component{
                     <div className="section-form-inner">
 
                         <label htmlFor="hours">Close:</label>
-                        <select id='hours' value={this.state.close_time}
+                        <select  value={this.state.close_time}
                         onChange={(e) => this.updateCloseTime(e.target.value)}>
                             <option value='0'>Closed</option>
 

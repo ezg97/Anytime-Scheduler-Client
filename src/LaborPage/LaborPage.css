@@ -1,11 +1,4 @@
-#select-labor{
-    border: 1px solid black;
-    margin: auto 0;
-    color: black;
-    padding: 5px;
-    font-size: 14px;
 
-}
 
 /*
     FORM
@@ -43,9 +36,7 @@
 @media screen and (min-width: 1024px) {
     
 
-    #hours{
-        font-size: 35px;
-    }
+
 
     #select-labor{
         

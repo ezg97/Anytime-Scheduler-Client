@@ -53,14 +53,14 @@ class AddEmployeesPage extends React.Component{
 
    clearAlert = () => {
         this.setState({
-            alertClass:"message hide"
+            alertClass:"message hide",
         });
     }
 
     showAlert = (message, successClass='') => {
         this.setState({
             alertClass: `message ${successClass}`,
-            alertMessage: message
+            alertMessage: message,
         });
     }
 
@@ -81,7 +81,7 @@ class AddEmployeesPage extends React.Component{
         });
 
         if(matched === false){
-            this.clearAlert()
+            this.clearAlert();
             this.updateEmployeeExists(false);
         }
        
@@ -97,7 +97,7 @@ class AddEmployeesPage extends React.Component{
     updateAvailability = (val) => {
         this.setState(
             {availability: val}
-        )
+        );
     }
 
     updateEmployeeExists = (bool) => {
@@ -145,7 +145,7 @@ class AddEmployeesPage extends React.Component{
         .then(res => {
             if( !res.ok ){
                 return res.json().then(err => {
-                    throw new Error(err.status)
+                    throw new Error(err.status);
                 })
             }
             //show the user this action was successful

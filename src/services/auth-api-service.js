@@ -43,6 +43,9 @@ const AuthApiService = {
         })
         return res
       })
+      .catch(err => {
+        console.log("Error");
+      });
   },
   postRefreshToken() {
     return fetch(`${config.API_ENDPOINT}/auth/refresh`, {

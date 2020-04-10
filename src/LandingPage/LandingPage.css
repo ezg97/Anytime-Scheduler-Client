@@ -20,12 +20,12 @@ url('../people.png');
 /* 
         - Header
 */
-.landing.header{
+.landing-header{
   height: 35%;
 }
 
-.landing.header h1{
-  min-height: 100px;
+.landing-header h1{
+  min-height: 250px;
   max-width: 550px; 
   
   display: flex;
@@ -35,32 +35,6 @@ url('../people.png');
   font-family: 'Varela Round', sans-serif;
 }
 
-.landing.header a, .landing.header a:visited{
-
-    border: 1px solid black;
-    
-    background-color: #383e42;
-    color: rgb(240,240,240);
-
-    border-radius: 5px;
-    padding: 6px;
-    width: 90px;
-
-    font-weight: bold;
-    text-decoration: none;
-
-    cursor: pointer;
-}
-
-.landing.header a:hover, .landing.header a:focus{
-    border: 1px solid black;
-    background-color: grey;
-    color: white;
-}
-
-.landing.header a:active{
-  text-decoration: underline;
-}
 
 
 /* WHOLE INFO SECTION*/

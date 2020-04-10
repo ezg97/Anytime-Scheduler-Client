@@ -145,8 +145,8 @@ class App extends Component {
         )
         .then(data => {
             if (!data.ok){
-                data=[];
-                return data;
+                throw new Error(data.status)
+     
             }
 
             return data.json();
@@ -165,7 +165,9 @@ class App extends Component {
             .then(data => {
               
               if (!data.ok){
-                  return data.json().then(e => Promise.reject(e));}
+                  console.log('eror: ',data)
+                  return data.json().then(e => Promise.reject(e));
+                }
 
               return data.json();
             });
@@ -183,6 +185,7 @@ class App extends Component {
             
       })
       .catch(error => {
+        console.log('1');
             this.logout();
       });
   }
@@ -227,9 +230,12 @@ class App extends Component {
           return employees.json();
       })
       .then( (employees) => {
+        console.log('2');
+
           this.setState({employees});
       })
       .catch(error => {
+
         this.logout();
       });
 

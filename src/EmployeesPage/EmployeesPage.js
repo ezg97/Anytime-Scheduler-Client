@@ -64,7 +64,7 @@ class EmployeesPage extends React.Component{
         this.clearAlert();
 
         /* Save the name selected to STATE */
-        if(val !== "None"){
+        if(val !== ""){
             this.setState({emp: val});
         }
         else{
@@ -235,20 +235,27 @@ class EmployeesPage extends React.Component{
 
             </header>
             
-            {/* Name selection */}
-            <select id='select-employees' value={this.state.emp}
-            onChange={(e) => this.handleSelectedEmployee(e.target.value)}>
-                    <option value="">None</option>
-
-                    {employees.map( (employee, index) => 
-                        /* Have to test the value exists before proceeding*/
-                        <option key={index} value={employee? employee.emp_name:null}>{employee? employee.emp_name:null}</option>
-                    )}
-
-            </select>
+        
 
            {/* FORM */}
             <form className="employee-form" onSubmit={e => this.handleSubmit(e)}>
+                <section className="section-form">
+                    <div className="section-form-inner">
+                        <label htmlFor="employee">Employee:</label>
+                        {/* Name INPUT */}
+                        <select id='select-employees' value={this.state.emp}
+                        onChange={(e) => this.handleSelectedEmployee(e.target.value)}>
+                                <option value="">None</option>
+
+                                {employees.map( (employee, index) => 
+                                    /* Have to test the value exists before proceeding*/
+                                    <option key={index} value={employee? employee.emp_name:null}>{employee? employee.emp_name:null}</option>
+                                )}
+
+                        </select>
+                    </div>
+                </section>
+
 
                 <section className="section-form">
                     <div className="section-form-inner">

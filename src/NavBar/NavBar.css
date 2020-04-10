@@ -3,7 +3,9 @@
 */
 
 .app_nav{
-    height: 8%;
+    box-sizing: border-box;
+    height: 50px;
+    max-height: 60px;
     width: 100%;
 
     padding: 2%;
@@ -12,7 +14,7 @@
     color: white;
     
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
 
     position: fixed;

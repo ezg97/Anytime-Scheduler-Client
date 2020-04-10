@@ -349,17 +349,25 @@ class LaborPage extends React.Component{
                     the labor for that hour</p>
             </header>
            
-            <select id='select-labor' value={this.state.day}
-            onChange={(e) => this.handleSelectedDay(e.target.value)}>
-                <option value="">None</option>
-                {/* Displays the list of 7 days */}
-                {days.map( (businessDay, index) => 
-                    <option key={index} value={businessDay}>{businessDay}</option>
-                )}
-            </select>
 
            
             <form className="labor-form" onSubmit={e => this.handleSubmit(e)}>
+                
+
+            <section className="section-form">
+                    <div className="section-form-inner">
+                        <label htmlFor="day">Employee:</label>
+                        <select id='select-employees' value={this.state.day}
+                        onChange={(e) => this.handleSelectedDay(e.target.value)}>
+                            <option value="">None</option>
+                            {/* Displays the list of 7 days */}
+                            {days.map( (businessDay, index) => 
+                                <option key={index} value={businessDay}>{businessDay}</option>
+                            )}
+                        </select>
+                    </div>
+                </section>
+
 
                 <section className="section-form">
                     <div className="section-form-inner">

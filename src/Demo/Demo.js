@@ -26,7 +26,7 @@ class Demo extends React.Component{
         return(
             
 
-        <div className="page-container crud">
+        <div className="page-container display schedule">
              {/* 1. HEADER*/}
             <header className='header'>
                 <h1>Weekly Schedule.</h1>

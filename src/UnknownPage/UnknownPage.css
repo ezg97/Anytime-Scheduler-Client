@@ -17,6 +17,7 @@
 .not-found h1{
     font-size: 50px;
     color: red;
+    line-height: 2;
 }
 
 .not-found section{
