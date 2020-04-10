@@ -2,7 +2,7 @@
 
 Live Site: [Anytime Scheduler](https://anytime-scheduler-client.now.sh/)
 
-##Description
+## Description
 Create an account or login if you're an existing user, then add, edit, or delete users from your company, edit the hours of operation, and the labor (amount of employees working per hour). The info you provide will allow the application to generate a weekly schedule that adheres to your specifications. 
 
 ## Technologies Used
