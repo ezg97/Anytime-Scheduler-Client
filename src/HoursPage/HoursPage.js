@@ -239,7 +239,7 @@ class HoursPage extends React.Component{
         .then(res => {
             if( !res.ok ){
                 return res.json().then(err => {
-                    throw new Error(err.status)
+                    throw new Error(err.status);
                 })
             }
             this.showAlert('Successfully Updated','success');
@@ -266,7 +266,7 @@ class HoursPage extends React.Component{
         .then(res => {
             if( !res.ok ){
                 return res.json().then(err => {
-                    throw new Error(err.status)
+                    throw new Error(err.status);
                 })
             }
             this.showAlert('Successfully Updated','success');
@@ -376,7 +376,7 @@ class HoursPage extends React.Component{
                                         ?hours.map( (hour, index) =>
                                             //if the current hour matches the closing time hour, then show it
                                             (hour.time === businessDay.close_time)
-                                                ?<option key={index} value={hour.time} selected>{hour.time}</option>
+                                                ?<option key={index} value={hour.time}>{hour.time}</option>
                                                 :<option key={index} value={hour.time}>{hour.time}</option>
                                         )
                                         //if the selected day does NOT match any day stored in the operation table

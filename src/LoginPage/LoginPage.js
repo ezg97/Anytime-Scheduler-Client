@@ -58,13 +58,11 @@ class LoginPage extends React.Component {
             password: password,
         })
         .then( res => {
-            console.log('response', res);
             if(res){
-                console.log('in iffffff');
                 this.clearError();
                 const { history } = this.props;
                 history.push('/');
-                this.context.fetchDatabase()
+                this.context.fetchDatabase();
             }
             else {
                 return res.json().then(err => {

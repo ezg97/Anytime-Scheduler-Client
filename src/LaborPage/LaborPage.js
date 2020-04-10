@@ -82,7 +82,7 @@ class LaborPage extends React.Component{
             midday = 'PM';
         }
     
-        let emptyWeek = {business_id: TokenService.getId(), 'shift_time': newShiftTime, midday, monday:0,tuesday:0,wednesday:0,thursday:0,friday:0,saturday:0,sunday:0}
+        let emptyWeek = {business_id: TokenService.getId(), 'shift_time': newShiftTime, midday, monday:0,tuesday:0,wednesday:0,thursday:0,friday:0,saturday:0,sunday:0};
 
         //Verify if ANY edits have been made to the employee by comparing what's in the 
         // database with what we have in state
@@ -106,8 +106,7 @@ class LaborPage extends React.Component{
 
         if(existingHour === false && shift_time!=='' && shift_time!==0){
             
-            this.addBusinessLabor({ ...emptyWeek, [`${day.toLowerCase()}`]:labor_quantity })
-            //this.patchBusinessLabor(day, labor_quantity, );
+            this.addBusinessLabor({ ...emptyWeek, [`${day.toLowerCase()}`]:labor_quantity });
             this.clearAlert();
         }
         
@@ -129,7 +128,7 @@ class LaborPage extends React.Component{
         .then(res => {
             if( !res.ok ){
                 return res.json().then(err => {
-                    throw new Error(err.status)
+                    throw new Error(err.status);
                 })
             }
             //show the user this action was successful
@@ -157,7 +156,7 @@ class LaborPage extends React.Component{
         .then(res => {
             if( !res.ok ){
                 return res.json().then(err => {
-                    throw new Error(err.status)
+                    throw new Error(err.status);
                 })
             }
             //show the user this action was successful
@@ -227,7 +226,7 @@ class LaborPage extends React.Component{
                 shift_time:'0',
                 labor_quantity: 0,
                 day: val,
-            })
+            });
         }
 
         //set "day" to "none" if no day was selected
@@ -272,7 +271,7 @@ class LaborPage extends React.Component{
         if(hourExists === false){
             this.setState({
                 labor_quantity: 0,
-            })
+            });
         }
     }
 
@@ -290,7 +289,7 @@ class LaborPage extends React.Component{
     updateId = (id) => {
         this.setState({
             index: id
-        })
+        });
     }
 
     /*

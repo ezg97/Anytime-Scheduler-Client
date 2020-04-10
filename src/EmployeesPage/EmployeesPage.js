@@ -117,7 +117,7 @@ class EmployeesPage extends React.Component{
 
         this.setState(
             {availability: val}
-        )
+        );
     }
 
 
@@ -169,8 +169,8 @@ class EmployeesPage extends React.Component{
         .then(res => {
             if( !res.ok ){
                 return res.json().then(err => {
-                    throw new Error(err.status)
-                })
+                    throw new Error(err.status);
+                });
             }
             this.showAlert('Successfully Deleted','success');
             this.context.updateEmployees();

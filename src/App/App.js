@@ -87,7 +87,6 @@ class App extends Component {
     /* if a user is logged in */
     if (TokenService.hasAuthToken()) {
       //fetch from the database if the user has a token
-      console.log('answer',TokenService.hasAuthToken())
       this.fetchDatabase();
 
         /*
@@ -132,7 +131,6 @@ class App extends Component {
 
   fetchDatabase = () => {
     //first update the requests
-    console.log('fetching... ', TokenService.hasAuthToken(), TokenService.getAuthToken())
     this.updateRequests();
 
 
@@ -165,9 +163,7 @@ class App extends Component {
                 }
             })
             .then(data => {
-              console.log('response receieved', data);
               if (!data.ok){
-                  console.error('eror: ',data)
                   return data.json().then(e => Promise.reject(e));
                 }
 
@@ -183,7 +179,6 @@ class App extends Component {
             this.setState({business, hours, employees, 'dayLabor': dayLabor.length>0? this.sort(dayLabor):[], fetched: true});
       })
       .catch(error => {
-        console.log('1',error);
         this.logout();
       });
   }
@@ -231,8 +226,6 @@ class App extends Component {
           this.setState({employees});
       })
       .catch(error => {
-        console.log('2');
-
         this.logout();
       });
 
@@ -374,7 +367,7 @@ class App extends Component {
           updateBusinessLabor: this.updateBusinessLabor}}>
 
           <div className="container">
-            {/* NAV BAR */ console.log('state', this.state)}
+            {/* NAV BAR */}
             <Switch>
 
                 {/* SIGNED IN */}

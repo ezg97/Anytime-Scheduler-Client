@@ -40,8 +40,8 @@ const AuthApiService = {
         TokenService.saveId(res.id);
         TokenService.queueCallbackBeforeExpiry(() => {
           AuthApiService.postRefreshToken()
-        })
-        return res
+        });
+        return res;
       })
       .catch(err => {
         //error caught

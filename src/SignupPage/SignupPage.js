@@ -73,7 +73,7 @@ class SignupPage extends React.Component{
                 // push to home page now that the user is logged in
                 this.props.pushHome();
                 // fetch the new info from the database with the new id
-                this.context.fetchDatabase()
+                this.context.fetchDatabase();
     
             })
             .catch(err => {

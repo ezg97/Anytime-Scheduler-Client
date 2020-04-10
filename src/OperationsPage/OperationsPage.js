@@ -32,13 +32,13 @@ class OperationsPage extends React.Component{
             this.setState({
                 employee: 'employee',
                 employeeChildren: 'children hide'
-            })
+            });
         }
         else{
             this.setState({
                 employee: 'employee hide',
                 employeeChildren: 'children'
-            })
+            });
         }
     }
 
@@ -46,7 +46,7 @@ class OperationsPage extends React.Component{
         this.setState({
             employee: 'employee',
             employeeChildren: 'children hide'
-        })
+        });
     }
 
     render(){

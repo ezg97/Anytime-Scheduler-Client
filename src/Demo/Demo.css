@@ -40,8 +40,8 @@
     
     .crud .header > p{
         margin-top:5%;
-
         color: grey;
+        margin-bottom: 10px;
     }
 
     #mySelect{
@@ -50,6 +50,8 @@
         font-size: 14px;
         margin: 20px auto;
         border: 1px solid black;
+
+        cursor: pointer;
     }
 
 /*-------------------------- RESPONSIVE LAYOUT --------------------------*/
@@ -87,7 +89,7 @@
         }
 
         .crud, .header{
-            margin-top: 30px;
+            padding-top: 30px;
         }
 
         .crud > .header > h1 {
@@ -97,6 +99,7 @@
         .crud .header > p{
             margin-top:1%;
             color: grey;
+            width: 80%;
         }
 
         .section-form-inner {
@@ -111,13 +114,12 @@
             font-size: 22px;  
         }
 
-        
     }
 
     
     @media screen and (min-width: 2000px) {
         .crud, .header{
-            margin-top: 50px;
+            padding-top: 50px;
         }
         #mySelect{
             font-size: 26px;  
